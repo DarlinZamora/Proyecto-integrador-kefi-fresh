@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("kefi-theme");
+          var theme =
+            stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <meta
+      name="description"
+      content="Kefi-Fresh elabora alimentos saludables y artesanales a base de kéfir, sin azúcares refinadas e ingredientes orgánicos. Lo saludable no tiene que ser aburrido."
+    />
+    <title>Kefi-Fresh | Productos naturales a base de kéfir</title>
+    <meta property="og:title" content="Kefi-Fresh | Productos naturales a base de kéfir" />
+    <meta
+      property="og:description"
+      content="Kefi-Fresh elabora alimentos saludables y artesanales a base de kéfir, sin azúcares refinadas e ingredientes orgánicos. Lo saludable no tiene que ser aburrido."
+    />
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+    <header class="site-header">
+      <div class="site-header__top">
+        <a class="site-header__brand" href="index.html" aria-label="Kefi-Fresh, ir al inicio">
+          Kefi-Fresh
+        </a>
+
+        <div class="site-header__actions">
+          <button
+            type="button"
+            class="btn btn--icon btn--circle theme-toggle"
+            data-theme-toggle
+            aria-pressed="false"
+            aria-label="Cambiar a modo oscuro"
+          >
+            <span aria-hidden="true">🌙</span>
+          </button>
+          <a class="site-header__login" href="index.html#contacto">Iniciar sesión</a>
+          <button
+            type="button"
+            class="btn btn--icon nav-toggle"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="site-nav"
+            aria-label="Abrir menú de navegación"
+          >
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="nav-backdrop" data-nav-backdrop></div>
+
+      <nav class="nav" id="site-nav" data-nav aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a href="index.html" aria-current="page">Inicio</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+          <li class="nav__login-item">
+            <a href="index.html#contacto">Iniciar sesión</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="contenido-principal">
+      <section id="inicio" class="hero" aria-labelledby="hero-title" aria-describedby="hero-bio">
+        <div class="hero__intro">
+          <h1 id="hero-title" class="hero__title">Kefi-Fresh</h1>
+          <p class="hero__tagline">Lo saludable no tiene porque ser aburrido</p>
+          <p class="hero__greeting">Hi KefiLovers, soy Darilin Zamora.</p>
+        </div>
+
+        <figure class="hero__figure">
+          <div class="image-placeholder" role="img" aria-label="Imagen personal de Darilin Zamora">
+            <span class="image-placeholder__label">Imagen personal</span>
+          </div>
+        </figure>
+
+        <p id="hero-bio" class="hero__bio">
+          Estudiante Politécnica de la ESPOL y emprendedora de productos naturales a base de
+          kéfir llamado Kefi-Fresh.
+        </p>
+      </section>
+
+      <section id="productos" class="products" aria-labelledby="products-title">
+        <h2 id="products-title" class="section-title">Productos disponibles</h2>
+
+        <div
+          class="carousel"
+          role="region"
+          aria-roledescription="carrusel"
+          aria-label="Galería de productos disponibles"
+          data-carousel
+        >
+          <div class="carousel__viewport">
+            <ul class="carousel__track" aria-live="polite">
+              <li class="carousel__slide is-active" aria-hidden="false">
+                <figure>
+                  <div class="image-placeholder image-placeholder--wide" role="img" aria-label="Dulce amor, postre de frutos rojos">
+                    <span class="image-placeholder__label">Imagen del postre</span>
+                  </div>
+                  <figcaption class="visually-hidden">Dulce amor</figcaption>
+                </figure>
+              </li>
+              <li class="carousel__slide" aria-hidden="true">
+                <figure>
+                  <div class="image-placeholder image-placeholder--wide" role="img" aria-label="Kéfir natural con miel">
+                    <span class="image-placeholder__label">Imagen del postre</span>
+                  </div>
+                  <figcaption class="visually-hidden">Kéfir con miel</figcaption>
+                </figure>
+              </li>
+              <li class="carousel__slide" aria-hidden="true">
+                <figure>
+                  <div class="image-placeholder image-placeholder--wide" role="img" aria-label="Parfait artesanal de kéfir">
+                    <span class="image-placeholder__label">Imagen del postre</span>
+                  </div>
+                  <figcaption class="visually-hidden">Parfait artesanal</figcaption>
+                </figure>
+              </li>
+            </ul>
+          </div>
+
+          <div class="carousel__controls">
+            <button
+              type="button"
+              class="btn btn--icon btn--circle carousel__button"
+              data-carousel-prev
+              aria-label="Producto anterior"
+            >
+              &#8592;
+            </button>
+
+            <div class="carousel__dots" role="tablist" aria-label="Seleccionar producto">
+              <button
+                type="button"
+                class="carousel__dot is-active"
+                role="tab"
+                aria-selected="true"
+                aria-controls="producto-slide-1"
+                data-carousel-dot="0"
+              >
+                <span class="visually-hidden">Producto 1</span>
+              </button>
+              <button
+                type="button"
+                class="carousel__dot"
+                role="tab"
+                aria-selected="false"
+                aria-controls="producto-slide-2"
+                data-carousel-dot="1"
+              >
+                <span class="visually-hidden">Producto 2</span>
+              </button>
+              <button
+                type="button"
+                class="carousel__dot"
+                role="tab"
+                aria-selected="false"
+                aria-controls="producto-slide-3"
+                data-carousel-dot="2"
+              >
+                <span class="visually-hidden">Producto 3</span>
+              </button>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn--icon btn--circle carousel__button"
+              data-carousel-next
+              aria-label="Producto siguiente"
+            >
+              &#8594;
+            </button>
+          </div>
+        </div>
+
+        <article class="product-detail" aria-labelledby="product-name">
+          <figure class="product-detail__media">
+            <div class="image-placeholder" role="img" aria-label="Imagen del postre Dulce amor">
+              <span class="image-placeholder__label">Imagen del postre</span>
+            </div>
+          </figure>
+
+          <div class="product-detail__content">
+            <h3 id="product-name">Nombre: Dulce amor</h3>
+
+            <p class="product-detail__label" id="product-categories-label">Categoría:</p>
+            <ul class="tag-list" aria-labelledby="product-categories-label">
+              <li class="tag">Postre</li>
+              <li class="tag">Merienda</li>
+              <li class="tag">Después del almuerzo</li>
+              <li class="tag">Medio en azúcar</li>
+              <li class="tag">Artesanal</li>
+              <li class="tag">Frutos Rojos</li>
+            </ul>
+
+            <p class="product-detail__price">
+              <span class="product-detail__label">Precio:</span> $3
+            </p>
+
+            <div class="product-detail__ingredients">
+              <p class="product-detail__label">Ingredientes:</p>
+              <p>
+                Postre de frutos rojos (fresa, arándano, frambuesa y mora), esencias naturales
+                (canela y clavo de olor) y chocolate orgánico.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="testimonios" class="testimonials" aria-labelledby="testimonials-title">
+        <h2 id="testimonials-title" class="section-title">Testimonios</h2>
+        <p class="testimonials__subtitle">Reseña de un profesional</p>
+
+        <article class="testimonial" aria-labelledby="testimonial-author">
+          <figure class="testimonial__author">
+            <div class="image-placeholder" role="img" aria-label="Foto de Ing. Carlos Bustamante">
+              <span class="image-placeholder__label">Imagen personal</span>
+            </div>
+            <figcaption>
+              <cite id="testimonial-author">Ing. Carlos Bustamante</cite>
+              <span class="testimonial__handle">@carlosbm</span>
+            </figcaption>
+          </figure>
+
+          <blockquote class="testimonial__quote">
+            <p>
+              Recomiendo este postre por su potencial de mercado y su sabor fresco. No es
+              demasiado dulce y funciona perfectamente como merienda saludable.
+            </p>
+          </blockquote>
+        </article>
+      </section>
+
+      <section id="contacto" class="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title" class="section-title">Contactos</h2>
+        <p class="contact__intro">
+          No dudes en ponerte en contacto conmigo a través del siguiente formulario. Me
+          comunicaré contigo lo antes posible.
+        </p>
+
+        <form class="form-contacto" action="#" method="post" novalidate data-contact-form>
+          <div class="form-field">
+            <label for="nombre">Nombre:</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              autocomplete="name"
+              required
+              aria-required="true"
+              aria-describedby="nombre-error"
+            />
+            <p class="form-field__error" id="nombre-error" role="alert"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="email">E-mail:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+              aria-required="true"
+              aria-describedby="email-error"
+            />
+            <p class="form-field__error" id="email-error" role="alert"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="mensaje">Mensaje:</label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="5"
+              required
+              aria-required="true"
+              aria-describedby="mensaje-error"
+            ></textarea>
+            <p class="form-field__error" id="mensaje-error" role="alert"></p>
+          </div>
+
+          <button type="submit" class="btn btn--primary">Enviar</button>
+        </form>
+        <div class="form-feedback" data-form-feedback role="status" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__main">
+        <div class="site-footer__brand">
+          <p class="site-footer__name">Kefi-Fresh</p>
+          <p class="site-footer__tagline">Lo saludable no tiene porque ser aburrido</p>
+        </div>
+
+        <div class="site-footer__social">
+          <p id="social-label" class="site-footer__social-label">Redes sociales</p>
+          <ul class="social-list" aria-labelledby="social-label">
+            <li>
+              <a href="#" class="btn btn--icon social-link" aria-label="Instagram de Kefi-Fresh">
+                <span class="social-link__icon" aria-hidden="true">IG</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="btn btn--icon social-link" aria-label="Facebook de Kefi-Fresh">
+                <span class="social-link__icon" aria-hidden="true">FB</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="btn btn--icon social-link" aria-label="WhatsApp de Kefi-Fresh">
+                <span class="social-link__icon" aria-hidden="true">WA</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="site-footer__copyright">
+        &copy; 2026 Kefi-Fresh. Todos los derechos reservados
+      </p>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/contact-form.js"></script>
+  </body>
+</html>

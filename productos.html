@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("kefi-theme");
+          var theme =
+            stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <meta
+      name="description"
+      content="Descubre el catálogo de Kefi-Fresh: postres y bebidas artesanales a base de kéfir, sin azúcares refinadas, elaborados con ingredientes orgánicos y naturales."
+    />
+    <title>Productos | Kefi-Fresh</title>
+    <meta property="og:title" content="Productos | Kefi-Fresh" />
+    <meta
+      property="og:description"
+      content="Descubre el catálogo de Kefi-Fresh: postres y bebidas artesanales a base de kéfir, sin azúcares refinadas, elaborados con ingredientes orgánicos y naturales."
+    />
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+    <header class="site-header">
+      <div class="site-header__top">
+        <a class="site-header__brand" href="index.html" aria-label="Kefi-Fresh, ir al inicio">
+          Kefi-Fresh
+        </a>
+
+        <div class="site-header__actions">
+          <button
+            type="button"
+            class="btn btn--icon btn--circle theme-toggle"
+            data-theme-toggle
+            aria-pressed="false"
+            aria-label="Cambiar a modo oscuro"
+          >
+            <span aria-hidden="true">🌙</span>
+          </button>
+          <a class="site-header__login" href="index.html#contacto">Iniciar sesión</a>
+          <button
+            type="button"
+            class="btn btn--icon nav-toggle"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="site-nav"
+            aria-label="Abrir menú de navegación"
+          >
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="nav-backdrop" data-nav-backdrop></div>
+
+      <nav class="nav" id="site-nav" data-nav aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="productos.html" aria-current="page">Productos</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+          <li class="nav__login-item">
+            <a href="index.html#contacto">Iniciar sesión</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="contenido-principal">
+      <section class="products" aria-labelledby="products-title">
+        <h1 id="products-title" class="section-title">Productos disponibles</h1>
+
+        <article class="product-detail" aria-labelledby="product-name">
+          <figure class="product-detail__media">
+            <div class="image-placeholder" role="img" aria-label="Imagen del postre Dulce amor">
+              <span class="image-placeholder__label">Imagen del postre</span>
+            </div>
+          </figure>
+
+          <div class="product-detail__content">
+            <h2 id="product-name">Nombre: Dulce amor</h2>
+
+            <p class="product-detail__label" id="product-categories-label">Categoría:</p>
+            <ul class="tag-list" aria-labelledby="product-categories-label">
+              <li class="tag">Postre</li>
+              <li class="tag">Merienda</li>
+              <li class="tag">Después del almuerzo</li>
+              <li class="tag">Medio en azúcar</li>
+              <li class="tag">Artesanal</li>
+              <li class="tag">Frutos Rojos</li>
+            </ul>
+
+            <p class="product-detail__price">
+              <span class="product-detail__label">Precio:</span> $3
+            </p>
+
+            <div class="product-detail__ingredients">
+              <p class="product-detail__label">Ingredientes:</p>
+              <p>
+                Postre de frutos rojos (fresa, arándano, frambuesa y mora), esencias naturales
+                (canela y clavo de olor) y chocolate orgánico.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__main">
+        <div class="site-footer__brand">
+          <p class="site-footer__name">Kefi-Fresh</p>
+          <p class="site-footer__tagline">Lo saludable no tiene porque ser aburrido</p>
+        </div>
+
+        <div class="site-footer__social">
+          <p id="social-label" class="site-footer__social-label">Redes sociales</p>
+          <ul class="social-list" aria-labelledby="social-label">
+            <li>
+              <a href="#" class="btn btn--icon social-link" aria-label="Instagram de Kefi-Fresh">
+                <span class="social-link__icon" aria-hidden="true">IG</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="btn btn--icon social-link" aria-label="Facebook de Kefi-Fresh">
+                <span class="social-link__icon" aria-hidden="true">FB</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="btn btn--icon social-link" aria-label="WhatsApp de Kefi-Fresh">
+                <span class="social-link__icon" aria-hidden="true">WA</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="site-footer__copyright">
+        &copy; 2026 Kefi-Fresh. Todos los derechos reservados
+      </p>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <script src="js/nav.js"></script>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("kefi-theme");
+          var theme =
+            stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <meta
+      name="description"
+      content="Conoce la historia de Kefi-Fresh, marca ecuatoriana que elabora alimentos saludables a base de kéfir, con ingredientes orgánicos y sin azúcar refinada."
+    />
+    <title>Nosotros | Kefi-Fresh</title>
+    <meta property="og:title" content="Nosotros | Kefi-Fresh" />
+    <meta
+      property="og:description"
+      content="Conoce la historia de Kefi-Fresh, marca ecuatoriana que elabora alimentos saludables a base de kéfir, con ingredientes orgánicos y sin azúcar refinada."
+    />
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+    <header class="site-header">
+      <div class="site-header__top">
+        <a class="site-header__brand" href="index.html" aria-label="Kefi-Fresh, ir al inicio">
+          Kefi-Fresh
+        </a>
+
+        <div class="site-header__actions">
+          <button
+            type="button"
+            class="btn btn--icon btn--circle theme-toggle"
+            data-theme-toggle
+            aria-pressed="false"
+            aria-label="Cambiar a modo oscuro"
+          >
+            <span aria-hidden="true">🌙</span>
+          </button>
+          <a class="site-header__login" href="index.html#contacto">Iniciar sesión</a>
+          <button
+            type="button"
+            class="btn btn--icon nav-toggle"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="site-nav"
+            aria-label="Abrir menú de navegación"
+          >
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="nav-backdrop" data-nav-backdrop></div>
+
+      <nav class="nav" id="site-nav" data-nav aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="nosotros.html" aria-current="page">Nosotros</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+          <li class="nav__login-item">
+            <a href="index.html#contacto">Iniciar sesión</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="contenido-principal">
+      <section class="hero" aria-labelledby="hero-title" aria-describedby="hero-bio">
+        <div class="hero__intro">
+          <h1 id="hero-title" class="hero__title">Nosotros</h1>
+          <p class="hero__tagline">Lo saludable no tiene porque ser aburrido</p>
+        </div>
+
+        <figure class="hero__figure">
+          <div class="image-placeholder" role="img" aria-label="Imagen personal de Darilin Zamora">
+            <span class="image-placeholder__label">Imagen personal</span>
+          </div>
+        </figure>
+
+        <p id="hero-bio" class="hero__bio">
+          Hi KefiLovers, soy Darilin Zamora, estudiante Politécnica de la ESPOL y emprendedora de
+          productos naturales a base de kéfir llamado Kefi-Fresh.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__main">
+        <div class="site-footer__brand">
+          <p class="site-footer__name">Kefi-Fresh</p>
+          <p class="site-footer__tagline">Lo saludable no tiene porque ser aburrido</p>
+        </div>
+
+        <div class="site-footer__social">
+          <p id="social-label" class="site-footer__social-label">Redes sociales</p>
+          <ul class="social-list" aria-labelledby="social-label">
+            <li>
+              <a href="#" class="btn btn--icon social-link" aria-label="Instagram de Kefi-Fresh">
+                <span class="social-link__icon" aria-hidden="true">IG</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="btn btn--icon social-link" aria-label="Facebook de Kefi-Fresh">
+                <span class="social-link__icon" aria-hidden="true">FB</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="btn btn--icon social-link" aria-label="WhatsApp de Kefi-Fresh">
+                <span class="social-link__icon" aria-hidden="true">WA</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="site-footer__copyright">
+        &copy; 2026 Kefi-Fresh. Todos los derechos reservados
+      </p>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <script src="js/nav.js"></script>
+  </body>
+</html>
