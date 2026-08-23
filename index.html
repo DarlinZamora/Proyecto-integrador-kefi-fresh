@@ -15,13 +15,13 @@
     </script>
     <meta
       name="description"
-      content="Kefi-Fresh elabora alimentos saludables y artesanales a base de kéfir, sin azúcares refinadas e ingredientes orgánicos. Lo saludable no tiene que ser aburrido."
+      content="Ke-Fresh elabora alimentos saludables y artesanales a base de kéfir, sin azúcares refinadas e ingredientes orgánicos. Lo saludable no tiene que ser aburrido."
     />
-    <title>Kefi-Fresh | Productos naturales a base de kéfir</title>
-    <meta property="og:title" content="Kefi-Fresh | Productos naturales a base de kéfir" />
+    <title>Ke-Fresh | Productos naturales a base de kéfir</title>
+    <meta property="og:title" content="Ke-Fresh | Productos naturales a base de kéfir" />
     <meta
       property="og:description"
-      content="Kefi-Fresh elabora alimentos saludables y artesanales a base de kéfir, sin azúcares refinadas e ingredientes orgánicos. Lo saludable no tiene que ser aburrido."
+      content="Ke-Fresh elabora alimentos saludables y artesanales a base de kéfir, sin azúcares refinadas e ingredientes orgánicos. Lo saludable no tiene que ser aburrido."
     />
     <link rel="stylesheet" href="css/estilos.css" />
   </head>
@@ -30,8 +30,8 @@
 
     <header class="site-header">
       <div class="site-header__top">
-        <a class="site-header__brand" href="index.html" aria-label="Kefi-Fresh, ir al inicio">
-          Kefi-Fresh
+        <a class="site-header__brand" href="index.html" aria-label="Ke-Fresh, ir al inicio">
+          Ke-Fresh
         </a>
 
         <div class="site-header__actions">
@@ -78,22 +78,29 @@
 
     <main id="contenido-principal">
       <section id="inicio" class="hero" aria-labelledby="hero-title" aria-describedby="hero-bio">
-        <div class="hero__intro">
-          <h1 id="hero-title" class="hero__title">Kefi-Fresh</h1>
-          <p class="hero__tagline">Lo saludable no tiene porque ser aburrido</p>
-          <p class="hero__greeting">Hi KefiLovers, soy Darilin Zamora.</p>
+        <div class="hero__text">
+          <div class="hero__intro">
+            <h1 id="hero-title" class="hero__title">Ke-Fresh</h1>
+            <p class="hero__tagline">Lo saludable no tiene porque ser aburrido</p>
+            <p class="hero__greeting">Hi KefiLovers, soy Darlin Zamora.</p>
+          </div>
+
+          <p id="hero-bio" class="hero__bio">
+            Estudiante Politécnica de la ESPOL y emprendedora de productos naturales a base de
+            kéfir llamado Ke-Fresh.
+          </p>
         </div>
 
         <figure class="hero__figure">
-          <div class="image-placeholder" role="img" aria-label="Imagen personal de Darilin Zamora">
-            <span class="image-placeholder__label">Imagen personal</span>
-          </div>
+          <img
+            class="hero__photo"
+            src="img/darlin-zamora.jpg"
+            alt="Darlin Zamora sonriendo y sosteniendo un vaso de Kefi-Fresh"
+            width="749"
+            height="1143"
+            loading="lazy"
+          />
         </figure>
-
-        <p id="hero-bio" class="hero__bio">
-          Estudiante Politécnica de la ESPOL y emprendedora de productos naturales a base de
-          kéfir llamado Kefi-Fresh.
-        </p>
       </section>
 
       <section id="productos" class="products" aria-labelledby="products-title">
@@ -110,26 +117,41 @@
             <ul class="carousel__track" aria-live="polite">
               <li class="carousel__slide is-active" aria-hidden="false">
                 <figure>
-                  <div class="image-placeholder image-placeholder--wide" role="img" aria-label="Dulce amor, postre de frutos rojos">
-                    <span class="image-placeholder__label">Imagen del postre</span>
-                  </div>
+                  <img
+                    class="carousel__photo"
+                    src="img/producto-frutos-rojos.jpg"
+                    alt="Dulce amor, postre de frutos rojos"
+                    width="842"
+                    height="1264"
+                    loading="lazy"
+                  />
                   <figcaption class="visually-hidden">Dulce amor</figcaption>
                 </figure>
               </li>
               <li class="carousel__slide" aria-hidden="true">
                 <figure>
-                  <div class="image-placeholder image-placeholder--wide" role="img" aria-label="Kéfir natural con miel">
-                    <span class="image-placeholder__label">Imagen del postre</span>
-                  </div>
-                  <figcaption class="visually-hidden">Kéfir con miel</figcaption>
+                  <img
+                    class="carousel__photo"
+                    src="img/producto-pina-coco.jpg"
+                    alt="Postre de piña y coco"
+                    width="758"
+                    height="1138"
+                    loading="lazy"
+                  />
+                  <figcaption class="visually-hidden">Piña coco</figcaption>
                 </figure>
               </li>
               <li class="carousel__slide" aria-hidden="true">
                 <figure>
-                  <div class="image-placeholder image-placeholder--wide" role="img" aria-label="Parfait artesanal de kéfir">
-                    <span class="image-placeholder__label">Imagen del postre</span>
-                  </div>
-                  <figcaption class="visually-hidden">Parfait artesanal</figcaption>
+                  <img
+                    class="carousel__photo"
+                    src="img/producto-frutas-verdes.jpg"
+                    alt="Postre de frutas verdes, kiwi y uva"
+                    width="842"
+                    height="1264"
+                    loading="lazy"
+                  />
+                  <figcaption class="visually-hidden">Frutas verdes</figcaption>
                 </figure>
               </li>
             </ul>
@@ -191,9 +213,14 @@
 
         <article class="product-detail" aria-labelledby="product-name">
           <figure class="product-detail__media">
-            <div class="image-placeholder" role="img" aria-label="Imagen del postre Dulce amor">
-              <span class="image-placeholder__label">Imagen del postre</span>
-            </div>
+            <img
+              class="product-detail__photo"
+              src="img/producto-frutos-rojos.jpg"
+              alt="Dulce amor, postre de frutos rojos"
+              width="842"
+              height="1264"
+              loading="lazy"
+            />
           </figure>
 
           <div class="product-detail__content">
@@ -230,9 +257,14 @@
 
         <article class="testimonial" aria-labelledby="testimonial-author">
           <figure class="testimonial__author">
-            <div class="image-placeholder" role="img" aria-label="Foto de Ing. Carlos Bustamante">
-              <span class="image-placeholder__label">Imagen personal</span>
-            </div>
+            <img
+              class="testimonial__photo"
+              src="img/carlos-bustamante.jpg"
+              alt="Foto de Ing. Carlos Bustamante"
+              width="1071"
+              height="768"
+              loading="lazy"
+            />
             <figcaption>
               <cite id="testimonial-author">Ing. Carlos Bustamante</cite>
               <span class="testimonial__handle">@carlosbm</span>
@@ -306,7 +338,7 @@
     <footer class="site-footer">
       <div class="site-footer__main">
         <div class="site-footer__brand">
-          <p class="site-footer__name">Kefi-Fresh</p>
+          <p class="site-footer__name">Ke-Fresh</p>
           <p class="site-footer__tagline">Lo saludable no tiene porque ser aburrido</p>
         </div>
 
@@ -314,18 +346,18 @@
           <p id="social-label" class="site-footer__social-label">Redes sociales</p>
           <ul class="social-list" aria-labelledby="social-label">
             <li>
-              <a href="#" class="btn btn--icon social-link" aria-label="Instagram de Kefi-Fresh">
-                <span class="social-link__icon" aria-hidden="true">IG</span>
+              <a href="#" class="btn btn--icon social-link" aria-label="Instagram de Ke-Fresh">
+                <img class="social-link__icon" src="img/instagram.avif" alt="" aria-hidden="true" width="24" height="24" />
               </a>
             </li>
             <li>
-              <a href="#" class="btn btn--icon social-link" aria-label="Facebook de Kefi-Fresh">
-                <span class="social-link__icon" aria-hidden="true">FB</span>
+              <a href="#" class="btn btn--icon social-link" aria-label="Facebook de Ke-Fresh">
+                <img class="social-link__icon" src="img/facebook.avif" alt="" aria-hidden="true" width="24" height="24" />
               </a>
             </li>
             <li>
-              <a href="#" class="btn btn--icon social-link" aria-label="WhatsApp de Kefi-Fresh">
-                <span class="social-link__icon" aria-hidden="true">WA</span>
+              <a href="#" class="btn btn--icon social-link" aria-label="WhatsApp de Ke-Fresh">
+                <img class="social-link__icon" src="img/whatsapp.avif" alt="" aria-hidden="true" width="24" height="24" />
               </a>
             </li>
           </ul>
@@ -333,7 +365,7 @@
       </div>
 
       <p class="site-footer__copyright">
-        &copy; 2026 Kefi-Fresh. Todos los derechos reservados
+        &copy; 2026 Ke-Fresh. Todos los derechos reservados
       </p>
     </footer>
 
