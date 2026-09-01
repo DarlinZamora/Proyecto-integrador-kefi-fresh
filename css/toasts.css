@@ -1,0 +1,34 @@
+/* Toasts — región aria-live, autodescarte, máximo 3 visibles */
+
+.c-toast-container {
+}
+
+.c-toast {
+}
+
+.c-toast p {
+}
+
+.c-toast--success {
+}
+
+.c-toast--error {
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .c-toast-container {
+  }
+
+  .c-toast {
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .c-toast-container {
+  }
+
+  .c-toast {
+  }
+}

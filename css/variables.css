@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Ke-Fresh — Backoffice: variables de diseño (design tokens)
+   Comparte la paleta e identidad de /css/estilos.css; agrega los tokens
+   semánticos (éxito/error/advertencia/info, foco, overlay, capas) que
+   necesitan los componentes de interacción del playground.
+   ========================================================================== */
+
+:root {
+  /* Paleta base — igual que el sitio público */
+  --color-bg: #faf8f5;
+  --color-surface: #ffffff;
+  --color-text: #2c2c2c;
+  --color-muted: #5c5c5c;
+  --color-accent: #6b8f71;
+  --color-accent-dark: #4f6f55;
+  --color-border: #d8d2c8;
+  --color-on-accent: #ffffff;
+--semantic-success: #10b981;
+--semantic-error: #fc5a5a;
+--semantic-warning: #f59e0b;
+--semantic-info: #3b82f6;
+
+--border: 2px;
+
+  /* Colores semánticos — alerts, toasts, estados de foco */
+  --color-success: #4f6f55;
+  --color-success-bg: #eef4ef;
+  --color-success-border: #bcd6c1;
+  --color-error: #c0392b;
+  --color-error-bg: #fbeae7;
+  --color-error-border: #eabdb6;
+  --color-warning: #a86a1d;
+  --color-warning-bg: #fbf1de;
+  --color-warning-border: #e9cd9a;
+  --color-info: #2f6690;
+  --color-info-bg: #e8f1f7;
+  --color-info-border: #b9d4e6;
+
+  --color-danger: var(--color-error);
+  --color-danger-dark: #942a1f;
+
+  --color-focus-ring: #2f6690;
+  --color-overlay: rgba(28, 28, 26, 0.5);
+
+  /* Tipografía */
+  --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+
+  --fs-2xs: 0.75rem;
+  --fs-xs: 0.875rem;
+  --fs-sm: 0.95rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+
+  /* Espaciado */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  --control-padding-y: 0.75rem;
+  --control-padding-x: 1.25rem;
+  --size-icon-btn: 2.75rem;
+
+  /* Bordes, sombras, foco */
+  --radius: 0.75rem;
+  --radius-sm: calc(var(--radius) / 2);
+  --radius-pill: 999px;
+  --shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 1rem 3rem rgba(0, 0, 0, 0.18);
+  --focus-ring-width: 0.15rem;
+  --focus-ring-offset: 0.15rem;
+
+  /* Transiciones */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+
+  /* Capas (z-index) — menús y toasts por debajo del diálogo modal */
+  --z-menu: 20;
+  --z-dialog: 30;
+  --z-toast: 40;
+}
+
+/* Modo oscuro: sigue la preferencia del sistema si el usuario no eligió tema */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #1c1c1a;
+    --color-surface: #242420;
+    --color-text: #f1efe9;
+    --color-muted: #b8b3a8;
+    --color-accent: #6b8f71;
+    --color-accent-dark: #9fd6a8;
+    --color-border: #3d3d36;
+    --color-on-accent: #1c1c1a;
+
+    --color-success: #9fd6a8;
+    --color-success-bg: #23352a;
+    --color-success-border: #3c5c46;
+    --color-error: #ff6b5e;
+    --color-error-bg: #3a2420;
+    --color-error-border: #5c3a34;
+    --color-warning: #e6b567;
+    --color-warning-bg: #3a2f1c;
+    --color-warning-border: #5c4a2b;
+    --color-info: #7cb3dd;
+    --color-info-bg: #1f2e3a;
+    --color-info-border: #33495c;
+
+    --color-danger: var(--color-error);
+    --color-danger-dark: #ff8a7f;
+
+    --color-focus-ring: #7cb3dd;
+    --color-overlay: rgba(0, 0, 0, 0.65);
+
+    --shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.35);
+    --shadow-elevated: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Modo oscuro: elegido explícitamente con el selector de tema */
+:root[data-theme="dark"] {
+  --color-bg: #1c1c1a;
+  --color-surface: #242420;
+  --color-text: #f1efe9;
+  --color-muted: #b8b3a8;
+  --color-accent: #6b8f71;
+  --color-accent-dark: #9fd6a8;
+  --color-border: #3d3d36;
+  --color-on-accent: #1c1c1a;
+
+  --color-success: #9fd6a8;
+  --color-success-bg: #23352a;
+  --color-success-border: #3c5c46;
+  --color-error: #ff6b5e;
+  --color-error-bg: #3a2420;
+  --color-error-border: #5c3a34;
+  --color-warning: #e6b567;
+  --color-warning-bg: #3a2f1c;
+  --color-warning-border: #5c4a2b;
+  --color-info: #7cb3dd;
+  --color-info-bg: #1f2e3a;
+  --color-info-border: #33495c;
+
+  --color-danger: var(--color-error);
+  --color-danger-dark: #ff8a7f;
+
+  --color-focus-ring: #7cb3dd;
+  --color-overlay: rgba(0, 0, 0, 0.65);
+
+  --shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.35);
+  --shadow-elevated: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+}

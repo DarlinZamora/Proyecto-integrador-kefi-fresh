@@ -1,0 +1,61 @@
+/* Checkboxes y radios — filtro de tabla y opción única */
+
+.c-check-group {
+}
+
+.c-check-group legend {
+}
+
+.c-check {
+}
+
+.c-check input[type="checkbox"] {
+}
+
+.c-check input[type="checkbox"]:focus-visible {
+}
+
+.c-check label {
+}
+
+.c-radio-group {
+}
+
+.c-radio-group legend {
+}
+
+.c-radio {
+}
+
+.c-radio input[type="radio"] {
+}
+
+.c-radio input[type="radio"]:focus-visible {
+}
+
+.c-radio label {
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .c-check-group {
+  }
+
+  .c-radio-group {
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .c-check-group {
+  }
+
+  .c-check {
+  }
+
+  .c-radio-group {
+  }
+
+  .c-radio {
+  }
+}

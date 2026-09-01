@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Playground de componentes de interacción del backoffice de Ke-Fresh: alerts, botones, checkboxes/radios, dialogs, menús y toasts."
+    />
+    <meta name="robots" content="noindex" />
+    <title>Playground de componentes | Backoffice Ke-Fresh</title>
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!--
+      Chrome de la página (layout, aside, espaciado general).
+      El CSS de los componentes vive en /css, un archivo por componente.
+    -->
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.5;
+        color: #1f2933;
+        background-color: #f7f8fa;
+      }
+
+      .pg-skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        padding: 0.5rem 1rem;
+        background-color: #1f2933;
+        color: #fff;
+      }
+
+      .pg-skip-link:focus {
+        left: 0;
+        z-index: 10;
+      }
+
+      .pg-layout {
+        display: grid;
+        grid-template-columns: 16rem 1fr;
+        gap: 2rem;
+        align-items: start;
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 4rem;
+      }
+
+      .pg-aside {
+        position: sticky;
+        top: 2rem;
+        padding: 1.25rem;
+        border: 1px solid #d9dee5;
+        border-radius: 0.5rem;
+        background-color: #fff;
+      }
+
+      .pg-aside__title {
+        margin: 0 0 0.75rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #6b7684;
+      }
+
+      .pg-aside__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0.25rem;
+      }
+
+      .pg-aside__list a {
+        display: block;
+        padding: 0.4rem 0.5rem;
+        border-radius: 0.375rem;
+        color: #1f2933;
+        text-decoration: none;
+      }
+
+      .pg-aside__list a:hover,
+      .pg-aside__list a:focus-visible {
+        background-color: #eef1f5;
+        text-decoration: underline;
+      }
+
+      .pg-main {
+        display: grid;
+        gap: 2rem;
+        min-width: 0;
+      }
+
+      .pg-page-title {
+        margin: 0 0 0.25rem;
+        font-size: 1.75rem;
+      }
+
+      .pg-page-intro {
+        margin: 0;
+        max-width: 60ch;
+        color: #52606d;
+      }
+
+      .pg-section {
+        scroll-margin-top: 2rem;
+        padding: 1.5rem;
+        border: 1px solid #d9dee5;
+        border-radius: 0.5rem;
+        background-color: #fff;
+      }
+
+      .pg-section__title {
+        margin: 0 0 1.25rem;
+        font-size: 1.25rem;
+      }
+
+      .pg-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: start;
+      }
+
+      .pg-column__title {
+        margin: 0 0 0.75rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #6b7684;
+      }
+
+      .pg-demo {
+        display: grid;
+        gap: 0.75rem;
+        justify-items: start;
+        min-width: 0;
+      }
+
+      .pg-demo--row {
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+        align-items: center;
+      }
+
+      .pg-notes {
+        min-width: 0;
+        padding: 1rem;
+        border-left: 3px solid #d9dee5;
+        background-color: #fafbfc;
+      }
+
+      .pg-notes dl {
+        margin: 0;
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .pg-notes dt {
+        font-weight: 600;
+      }
+
+      .pg-notes dd {
+        margin: 0.15rem 0 0;
+        color: #52606d;
+      }
+
+      .pg-notes kbd {
+        padding: 0.05em 0.4em;
+        border: 1px solid #c3cad3;
+        border-radius: 0.25rem;
+        background-color: #fff;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.85em;
+      }
+
+      @media (max-width: 768px) {
+        .pg-layout {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+          padding: 1.5rem 1rem 3rem;
+        }
+
+        .pg-aside {
+          position: static;
+        }
+
+        .pg-columns {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .pg-section {
+          padding: 1rem;
+        }
+
+        .pg-demo--row {
+          grid-auto-flow: row;
+          grid-auto-columns: auto;
+          justify-items: stretch;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="pg-skip-link" href="#contenido-playground">Saltar al contenido principal</a>
+
+    <div class="pg-layout">
+      <aside class="pg-aside" aria-labelledby="pg-aside-title">
+        <h2 class="pg-aside__title" id="pg-aside-title">Componentes</h2>
+        <nav aria-labelledby="pg-aside-title">
+          <ul class="pg-aside__list">
+            <li><a href="#seccion-alerts">Alerts</a></li>
+            <li><a href="#seccion-botones">Botones</a></li>
+            <li><a href="#seccion-checkboxes-radios">Checkboxes/Radios</a></li>
+            <li><a href="#seccion-dialogs">Dialogs</a></li>
+            <li><a href="#seccion-menus">Menús</a></li>
+            <li><a href="#seccion-toasts">Toasts</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="pg-main" id="contenido-playground">
+        <div>
+          <h1 class="pg-page-title">Playground de componentes</h1>
+          <p class="pg-page-intro">
+            Componentes de interacción del backoffice de Ke-Fresh. Cada sección muestra el
+            componente real a la izquierda y su comportamiento de teclado y foco a la derecha.
+          </p>
+        </div>
+
+        <!-- 1. ALERTS -->
+        <section class="pg-section" id="seccion-alerts" aria-labelledby="titulo-alerts">
+          <h2 class="pg-section__title" id="titulo-alerts">Alerts</h2>
+
+          <div class="pg-columns">
+            <div>
+              <h3 class="pg-column__title">Componente</h3>
+              <div class="pg-demo">
+                <div class="c-alert c-alert--success" role="status">
+                  <span class="c-alert-icon" aria-hidden="true">&#10003;</span>
+                  <p class="c-alert-message">El producto se guardó correctamente.</p>
+                  <button type="button" class="c-alert-close" aria-label="Cerrar aviso de éxito">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="c-alert c-alert--error" role="alert">
+                  <span class="c-alert-icon" aria-hidden="true">&#9888;</span>
+                  <p class="c-alert-message">
+                    No se pudo guardar el producto. Revisa los campos marcados.
+                  </p>
+                  <button type="button" class="c-alert-close" aria-label="Cerrar aviso de error">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="c-alert c-alert--warning" role="alert">
+                  <span class="c-alert-icon" aria-hidden="true">&#9888;</span>
+                  <p class="c-alert-message">
+                    El stock de Dulce Amor está por debajo del mínimo definido.
+                  </p>
+                  <button
+                    type="button"
+                    class="c-alert-close"
+                    aria-label="Cerrar aviso de advertencia"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="c-alert c-alert--info" role="status">
+                  <span class="c-alert-icon" aria-hidden="true">&#8505;</span>
+                  <p class="c-alert-message">
+                    El catálogo se sincroniza automáticamente cada 30 minutos.
+                  </p>
+                  <button
+                    type="button"
+                    class="c-alert-close"
+                    aria-label="Cerrar aviso informativo"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="pg-notes">
+              <h3 class="pg-column__title">Comportamiento de teclado y foco</h3>
+              <dl>
+                <dt>Anuncio</dt>
+                <dd>
+                  Los alerts no reciben foco al aparecer. El lector de pantalla los anuncia por su
+                  rol: <code>role="alert"</code> (error y advertencia) interrumpe la lectura actual
+                  porque es urgente; <code>role="status"</code> (éxito e informativo) espera a una
+                  pausa. En ambos casos el foco del usuario no se mueve.
+                </dd>
+
+                <dt>Qué tecla lo activa</dt>
+                <dd>
+                  El único elemento enfocable es el botón de cerrar: se llega con <kbd>Tab</kbd> y
+                  se activa con <kbd>Enter</kbd> o <kbd>Espacio</kbd>, como cualquier
+                  <code>&lt;button&gt;</code> nativo.
+                </dd>
+
+                <dt>Qué tecla lo cierra</dt>
+                <dd>
+                  No hay atajo global: el alert es parte del flujo de la página, no una capa
+                  encima, así que <kbd>Escape</kbd> no lo cierra. Se cierra activando su botón.
+                </dd>
+
+                <dt>Qué pasa con el foco al cerrar</dt>
+                <dd>
+                  El botón de cerrar desaparece junto con el alert, por lo que el foco debe pasar
+                  al siguiente elemento enfocable del contenedor o, si no hay ninguno, al elemento
+                  que originó el aviso. Nunca se deja el foco en el
+                  <code>&lt;body&gt;</code>, porque eso devuelve al usuario al inicio del documento.
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. BOTONES -->
+        <section class="pg-section" id="seccion-botones" aria-labelledby="titulo-botones">
+          <h2 class="pg-section__title" id="titulo-botones">Botones</h2>
+
+          <div class="pg-columns">
+            <div>
+              <h3 class="pg-column__title">Componente</h3>
+              <div class="pg-demo pg-demo--row">
+                <button type="button" class="c-btn c-btn--primary">Guardar</button>
+                <button type="button" class="c-btn c-btn--secondary">Cancelar</button>
+                <button type="button" class="c-btn c-btn--destructive">Eliminar</button>
+                <button type="button" class="c-btn c-btn--icon" aria-label="Más opciones">
+                  <span aria-hidden="true">&#8942;</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="pg-notes">
+              <h3 class="pg-column__title">Comportamiento de teclado y foco</h3>
+              <dl>
+                <dt>Qué tecla lo activa</dt>
+                <dd>
+                  <kbd>Enter</kbd> y <kbd>Espacio</kbd> activan el botón. Al usar
+                  <code>&lt;button&gt;</code> nativo esto funciona sin JavaScript adicional y sin
+                  <code>tabindex</code>: no hace falta escuchar <code>keydown</code> a mano.
+                </dd>
+
+                <dt>Orden de foco</dt>
+                <dd>
+                  <kbd>Tab</kbd> avanza y <kbd>Mayús</kbd> + <kbd>Tab</kbd> retrocede en el orden
+                  del DOM. El anillo de foco debe ser siempre visible; el estilo se define en
+                  <code>botones.css</code>, nunca se elimina con <code>outline: none</code>.
+                </dd>
+
+                <dt>Icon button</dt>
+                <dd>
+                  El botón de solo ícono no tiene texto visible, así que su nombre accesible viene
+                  de <code>aria-label="Más opciones"</code>, y el glifo lleva
+                  <code>aria-hidden="true"</code> para que no se lea dos veces.
+                </dd>
+
+                <dt>Botón deshabilitado</dt>
+                <dd>
+                  Un botón con <code>disabled</code> sale del orden de tabulación y deja de
+                  anunciarse como accionable; por eso una acción destructiva se confirma con un
+                  diálogo en lugar de deshabilitarse silenciosamente.
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. CHECKBOXES / RADIOS -->
+        <section
+          class="pg-section"
+          id="seccion-checkboxes-radios"
+          aria-labelledby="titulo-checkboxes-radios"
+        >
+          <h2 class="pg-section__title" id="titulo-checkboxes-radios">Checkboxes/Radios</h2>
+
+          <div class="pg-columns">
+            <div>
+              <h3 class="pg-column__title">Componente</h3>
+              <div class="pg-demo">
+                <fieldset class="c-check-group">
+                  <legend>Filtrar productos por categoría</legend>
+
+                  <div class="c-check">
+                    <input type="checkbox" id="filtro-postres" name="filtro" value="postres" />
+                    <label for="filtro-postres">Postres</label>
+                  </div>
+
+                  <div class="c-check">
+                    <input
+                      type="checkbox"
+                      id="filtro-meriendas"
+                      name="filtro"
+                      value="meriendas"
+                      checked
+                    />
+                    <label for="filtro-meriendas">Meriendas</label>
+                  </div>
+
+                  <div class="c-check">
+                    <input
+                      type="checkbox"
+                      id="filtro-artesanales"
+                      name="filtro"
+                      value="artesanales"
+                    />
+                    <label for="filtro-artesanales">Artesanales</label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="c-radio-group">
+                  <legend>Estado de publicación</legend>
+
+                  <div class="c-radio">
+                    <input
+                      type="radio"
+                      id="estado-borrador"
+                      name="estado-publicacion"
+                      value="borrador"
+                      checked
+                    />
+                    <label for="estado-borrador">Borrador</label>
+                  </div>
+
+                  <div class="c-radio">
+                    <input
+                      type="radio"
+                      id="estado-publicado"
+                      name="estado-publicacion"
+                      value="publicado"
+                    />
+                    <label for="estado-publicado">Publicado</label>
+                  </div>
+
+                  <div class="c-radio">
+                    <input
+                      type="radio"
+                      id="estado-archivado"
+                      name="estado-publicacion"
+                      value="archivado"
+                    />
+                    <label for="estado-archivado">Archivado</label>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="pg-notes">
+              <h3 class="pg-column__title">Comportamiento de teclado y foco</h3>
+              <dl>
+                <dt>Checkboxes: qué tecla los activa</dt>
+                <dd>
+                  <kbd>Tab</kbd> visita cada checkbox por separado porque son independientes entre
+                  sí. <kbd>Espacio</kbd> alterna marcado/desmarcado. <kbd>Enter</kbd> no los
+                  cambia: en un formulario envía el formulario.
+                </dd>
+
+                <dt>Radios: qué tecla los activa</dt>
+                <dd>
+                  El grupo completo cuenta como una sola parada de <kbd>Tab</kbd>: el foco entra en
+                  la opción seleccionada. Dentro del grupo se navega con las flechas
+                  <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>&uarr;</kbd> <kbd>&darr;</kbd>, y mover
+                  el foco con flechas ya selecciona esa opción. El siguiente <kbd>Tab</kbd> sale
+                  del grupo entero.
+                </dd>
+
+                <dt>Nombre del grupo</dt>
+                <dd>
+                  El <code>&lt;legend&gt;</code> del <code>&lt;fieldset&gt;</code> se anuncia junto
+                  con cada opción, así que el lector dice «Estado de publicación, Borrador,
+                  seleccionado». Los radios comparten el mismo <code>name</code>, que es lo que los
+                  hace excluyentes.
+                </dd>
+
+                <dt>Área de clic y foco</dt>
+                <dd>
+                  Cada <code>&lt;label&gt;</code> apunta al input con <code>for</code>, así que
+                  hacer clic en el texto marca la opción y le da el foco. El anillo de foco se
+                  dibuja sobre el control, no sobre la etiqueta.
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. DIALOGS -->
+        <section class="pg-section" id="seccion-dialogs" aria-labelledby="titulo-dialogs">
+          <h2 class="pg-section__title" id="titulo-dialogs">Dialogs</h2>
+
+          <div class="pg-columns">
+            <div>
+              <h3 class="pg-column__title">Componente</h3>
+              <div class="pg-demo">
+                <button
+                  type="button"
+                  class="c-btn c-btn--destructive"
+                  data-dialog-open="dialog-eliminar-producto"
+                >
+                  Eliminar producto
+                </button>
+
+                <dialog
+                  class="c-dialog"
+                  id="dialog-eliminar-producto"
+                  aria-labelledby="dialog-eliminar-producto-titulo"
+                  aria-describedby="dialog-eliminar-producto-descripcion"
+                >
+                  <h2 class="c-dialog-title" id="dialog-eliminar-producto-titulo">
+                    ¿Eliminar «Dulce Amor»?
+                  </h2>
+                  <p id="dialog-eliminar-producto-descripcion">
+                    Se eliminará el producto y sus imágenes del catálogo. Esta acción no se puede
+                    deshacer.
+                  </p>
+
+                  <div class="c-dialog-actions">
+                    <button type="button" class="c-btn c-btn--secondary" data-dialog-close>
+                      Cancelar
+                    </button>
+                    <button
+                      type="button"
+                      class="c-btn c-btn--destructive"
+                      data-dialog-confirm="Producto eliminado del catálogo."
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </dialog>
+              </div>
+            </div>
+
+            <div class="pg-notes">
+              <h3 class="pg-column__title">Comportamiento de teclado y foco</h3>
+              <dl>
+                <dt>Qué tecla lo abre</dt>
+                <dd>
+                  <kbd>Enter</kbd> o <kbd>Espacio</kbd> sobre el botón «Eliminar producto» llaman a
+                  <code>.showModal()</code>. Se usa el modo modal, no <code>.show()</code>: solo
+                  <code>.showModal()</code> vuelve inerte el resto de la página y pinta el
+                  <code>::backdrop</code>.
+                </dd>
+
+                <dt>Qué tecla lo cierra</dt>
+                <dd>
+                  <kbd>Escape</kbd> lo cierra, y el <code>&lt;dialog&gt;</code> nativo ya lo hace
+                  por sí solo cuando está en modal. También cierra el botón «Cancelar». Nunca se
+                  usa <code>confirm()</code> nativo: bloquea el hilo y no se puede estilizar ni
+                  etiquetar.
+                </dd>
+
+                <dt>Foco al abrir</dt>
+                <dd>
+                  El foco entra al diálogo y queda atrapado dentro mientras está abierto:
+                  <kbd>Tab</kbd> cicla entre «Cancelar» y «Eliminar» sin salir nunca al contenido
+                  de atrás, que además queda inerte para el lector de pantalla. El foco inicial va
+                  a la acción segura («Cancelar»), no a la destructiva.
+                </dd>
+
+                <dt>Foco al cerrar</dt>
+                <dd>
+                  Al cerrarse — por <kbd>Escape</kbd>, por «Cancelar» o por confirmar — el foco
+                  vuelve exactamente al botón que lo abrió, para que el usuario retome donde
+                  estaba.
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. MENÚS -->
+        <section class="pg-section" id="seccion-menus" aria-labelledby="titulo-menus">
+          <h2 class="pg-section__title" id="titulo-menus">Menús</h2>
+
+          <div class="pg-columns">
+            <div>
+              <h3 class="pg-column__title">Componente</h3>
+              <div class="pg-demo pg-demo--row">
+                <div data-menu>
+                  <button
+                    type="button"
+                    class="c-btn c-btn--secondary c-menu-account-toggle"
+                    id="menu-cuenta-texto-trigger"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="menu-cuenta-texto"
+                    data-menu-toggle
+                  >
+                    Cuenta <span aria-hidden="true">&#9662;</span>
+                  </button>
+
+                  <ul
+                    class="c-menu-account"
+                    id="menu-cuenta-texto"
+                    aria-labelledby="menu-cuenta-texto-trigger"
+                    data-menu-list
+                    hidden
+                  >
+                    <li><a href="#seccion-menus">Perfil</a></li>
+                    <li><a href="#seccion-menus">Configuración</a></li>
+                    <li>
+                      <button type="button">Cerrar sesión</button>
+                    </li>
+                  </ul>
+                </div>
+
+                <div data-menu>
+                  <button
+                    type="button"
+                    class="c-btn c-btn--icon c-menu-account-toggle"
+                    id="menu-cuenta-icono-trigger"
+                    aria-label="Más opciones"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="menu-cuenta-icono"
+                    data-menu-toggle
+                  >
+                    <span aria-hidden="true">&#8942;</span>
+                  </button>
+
+                  <ul
+                    class="c-menu-account"
+                    id="menu-cuenta-icono"
+                    aria-labelledby="menu-cuenta-icono-trigger"
+                    data-menu-list
+                    hidden
+                  >
+                    <li><a href="#seccion-menus">Perfil</a></li>
+                    <li><a href="#seccion-menus">Configuración</a></li>
+                    <li>
+                      <button type="button">Cerrar sesión</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="pg-notes">
+              <h3 class="pg-column__title">Comportamiento de teclado y foco</h3>
+              <dl>
+                <dt>Qué tecla lo abre</dt>
+                <dd>
+                  <kbd>Enter</kbd> o <kbd>Espacio</kbd> sobre el trigger abren el desplegable, igual
+                  que el clic. Al abrir, <code>aria-expanded</code> pasa a
+                  <code>"true"</code> y el foco se mueve a la primera opción de la lista.
+                </dd>
+
+                <dt>Qué tecla lo cierra</dt>
+                <dd>
+                  <kbd>Escape</kbd> lo cierra desde cualquier punto del menú y devuelve el foco al
+                  trigger, con <code>aria-expanded</code> de vuelta en <code>"false"</code>. Un clic
+                  fuera del menú también lo cierra, pero ahí no se fuerza el foco: el usuario ya
+                  está apuntando a otro sitio.
+                </dd>
+
+                <dt>Navegación dentro del menú</dt>
+                <dd>
+                  Las flechas <kbd>&uarr;</kbd> <kbd>&darr;</kbd> recorren las opciones en ciclo y
+                  <kbd>Inicio</kbd> / <kbd>Fin</kbd> saltan a la primera y a la última. A diferencia
+                  del diálogo, el foco no está atrapado: <kbd>Tab</kbd> cierra el menú y sigue con
+                  el resto de la página.
+                </dd>
+
+                <dt>Los dos triggers</dt>
+                <dd>
+                  El trigger de texto y el icon button son el mismo componente: ambos llevan
+                  <code>c-btn</code> más <code>c-menu-account-toggle</code> y abren el mismo tipo de
+                  lista. El de ícono se identifica con <code>aria-label</code>;
+                  <code>aria-haspopup="true"</code> avisa en los dos casos que se abrirá un menú.
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. TOASTS -->
+        <section class="pg-section" id="seccion-toasts" aria-labelledby="titulo-toasts">
+          <h2 class="pg-section__title" id="titulo-toasts">Toasts</h2>
+
+          <div class="pg-columns">
+            <div>
+              <h3 class="pg-column__title">Componente</h3>
+              <div class="pg-demo pg-demo--row">
+                <button
+                  type="button"
+                  class="c-btn c-btn--primary"
+                  data-toast-demo="success"
+                  data-toast-message="Cambios guardados en el catálogo."
+                >
+                  Lanzar toast de éxito
+                </button>
+                <button
+                  type="button"
+                  class="c-btn c-btn--destructive"
+                  data-toast-demo="error"
+                  data-toast-message="No se pudo conectar con el servidor."
+                >
+                  Lanzar toast de error
+                </button>
+              </div>
+            </div>
+
+            <div class="pg-notes">
+              <h3 class="pg-column__title">Comportamiento de teclado y foco</h3>
+              <dl>
+                <dt>Anuncio sin robar el foco</dt>
+                <dd>
+                  Los toasts no son foco-interactivos: aparecen y se anuncian solos porque el
+                  contenedor tiene <code>aria-live="polite"</code>. El lector espera a una pausa y
+                  lee el mensaje sin mover el foco de donde esté el usuario, que puede seguir
+                  escribiendo sin interrupción.
+                </dd>
+
+                <dt>No bloquean la interacción</dt>
+                <dd>
+                  A diferencia del diálogo, no hay modal ni trampa de foco: el resto de la página
+                  sigue operable mientras el toast está visible, y <kbd>Tab</kbd> nunca entra en
+                  él.
+                </dd>
+
+                <dt>Desaparecen solos</dt>
+                <dd>
+                  Cada toast se retira tras unos segundos. Por eso nunca llevan la única vía para
+                  una acción ni información que el usuario necesite releer: para eso está el alert,
+                  que es persistente y sí tiene botón de cerrar.
+                </dd>
+
+                <dt>Máximo 3 visibles</dt>
+                <dd>
+                  El contenedor mantiene como máximo tres toasts a la vez; al llegar el cuarto se
+                  retira el más antiguo. Así la región <code>aria-live</code> no encola una ráfaga
+                  de anuncios que el usuario ya no puede seguir.
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="c-toast-container" aria-live="polite" aria-atomic="false" data-toast-container>
+      <div class="c-toast c-toast--success">
+        <p>Cambios guardados en el catálogo.</p>
+      </div>
+      <div class="c-toast c-toast--error">
+        <p>No se pudo conectar con el servidor.</p>
+      </div>
+    </div>
+
+    <script type="module" src="js/playground.js"></script>
+  </body>
+</html>

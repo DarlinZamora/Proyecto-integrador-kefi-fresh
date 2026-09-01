@@ -1,0 +1,37 @@
+/* Dialogs — <dialog> nativo abierto como modal (.showModal()) */
+
+.c-dialog {
+}
+
+.c-dialog[open] {
+}
+
+.c-dialog::backdrop {
+}
+
+.c-dialog-title {
+}
+
+.c-dialog-actions {
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .c-dialog {
+  }
+
+  .c-dialog-actions {
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .c-dialog {
+  }
+
+  .c-dialog-title {
+  }
+
+  .c-dialog-actions {
+  }
+}

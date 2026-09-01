@@ -1,0 +1,94 @@
+/* Alerts — éxito, error, advertencia e informativo */
+
+.c-alert {
+  display:flex;
+  align-items:center;
+  flex-direction:row;
+  border-radius: var(--radius-sm);
+}
+
+.c-alert--success {
+  border: var(--border) solid var(--semantic-success);
+}
+
+.c-alert--info {
+  border: var(--border) solid var(--semantic-info);
+}
+
+.c-alert--error {
+  border: var(--border) solid var(--semantic-error);
+}
+
+.c-alert--warning {
+  border: var(--border) solid var(--semantic-warning);
+}
+
+
+
+
+
+.c-alert--info .c-alert-icon {
+  color: var(--semantic-info);
+}
+
+
+.c-alert--success .c-alert-icon {
+  color: var(--semantic-success);
+}
+
+
+.c-alert--error .c-alert-icon {
+  color: var(--semantic-error);
+}
+
+
+.c-alert--warning .c-alert-icon {
+  color: var(--semantic-warning);
+}
+
+
+.c-alert--info .c-alert-icon {
+  color: var(--semantic-info);
+}
+
+
+.c-alert-icon {
+  color: var(--semantic-success);
+}
+
+.c-alert-message {
+  margin: 0;
+}
+
+.c-alert-close {
+}
+
+.c-alert-close:hover {
+}
+
+.c-alert-close:focus-visible {
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .c-alert {
+  }
+
+  .c-alert-message {
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .c-alert {
+  }
+
+  .c-alert-icon {
+  }
+
+  .c-alert-message {
+  }
+
+  .c-alert-close {
+  }
+}

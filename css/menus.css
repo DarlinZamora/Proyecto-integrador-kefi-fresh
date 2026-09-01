@@ -1,0 +1,41 @@
+/* Menús — dropdown de cuenta, con trigger de texto o icon button */
+
+.c-menu-account-toggle {
+}
+
+.c-menu-account-toggle[aria-expanded="true"] {
+}
+
+.c-menu-account {
+}
+
+.c-menu-account li {
+}
+
+.c-menu-account a,
+.c-menu-account button {
+}
+
+.c-menu-account a:hover,
+.c-menu-account button:hover {
+}
+
+.c-menu-account a:focus-visible,
+.c-menu-account button:focus-visible {
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .c-menu-account {
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .c-menu-account {
+  }
+
+  .c-menu-account a,
+  .c-menu-account button {
+  }
+}

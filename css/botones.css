@@ -1,0 +1,55 @@
+/* Botones — primario, secundario, destructivo e icon button */
+
+.c-btn {
+}
+
+.c-btn:hover {
+}
+
+.c-btn:focus-visible {
+}
+
+.c-btn:disabled {
+}
+
+.c-btn--primary {
+}
+
+.c-btn--primary:hover {
+}
+
+.c-btn--secondary {
+}
+
+.c-btn--secondary:hover {
+}
+
+.c-btn--destructive {
+}
+
+.c-btn--destructive:hover {
+}
+
+.c-btn--icon {
+}
+
+.c-btn--icon:hover {
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .c-btn {
+  }
+
+  .c-btn--icon {
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .c-btn {
+  }
+
+  .c-btn--icon {
+  }
+}
