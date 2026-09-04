@@ -1,5 +1,5 @@
 /**
- * Ke-Fresh — Backoffice / Playground de componentes
+ * Kefi-Fresh — Backoffice / Playground de componentes
  *
  * Comportamiento de interacción de Alerts, Dialogs, Menús y Toasts.
  * Todo el markup vive en playground.html y los estilos en /css.
