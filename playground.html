@@ -160,6 +160,40 @@
         align-items: center;
       }
 
+      .pg-btn-states {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .pg-btn-states__group-title {
+        margin: 0 0 0.75rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #1f2933;
+      }
+
+      .pg-btn-states__row {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+
+      .pg-btn-states__item {
+        display: grid;
+        justify-items: center;
+        gap: 0.4rem;
+        padding: 0.75rem 0.5rem;
+        border-radius: 0.375rem;
+        background-color: #fafbfc;
+      }
+
+      .pg-btn-states__label {
+        font-size: 0.75rem;
+        color: #6b7684;
+        text-align: center;
+      }
+
       .pg-notes {
         min-width: 0;
         padding: 1rem;
@@ -216,6 +250,10 @@
           grid-auto-flow: row;
           grid-auto-columns: auto;
           justify-items: stretch;
+        }
+
+        .pg-btn-states__row {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
     </style>
@@ -354,6 +392,125 @@
                   <span aria-hidden="true">&#8942;</span>
                 </button>
               </div>
+
+              <h3 class="pg-column__title" style="margin-top: 1.5rem">
+                Estados de affordance por variante
+              </h3>
+              <div class="pg-btn-states" aria-hidden="true">
+                <div>
+                  <p class="pg-btn-states__group-title">Primary</p>
+                  <div class="pg-btn-states__row">
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--primary" tabindex="-1">Guardar</button>
+                      <span class="pg-btn-states__label">Idle</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--primary is-hover" tabindex="-1">Guardar</button>
+                      <span class="pg-btn-states__label">Hover</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--primary is-focus" tabindex="-1">Guardar</button>
+                      <span class="pg-btn-states__label">Focus</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--primary is-active" tabindex="-1">Guardar</button>
+                      <span class="pg-btn-states__label">Pressed/Active</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--primary" disabled>Guardar</button>
+                      <span class="pg-btn-states__label">Disabled</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="pg-btn-states__group-title">Secondary</p>
+                  <div class="pg-btn-states__row">
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--secondary" tabindex="-1">Cancelar</button>
+                      <span class="pg-btn-states__label">Idle</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--secondary is-hover" tabindex="-1">Cancelar</button>
+                      <span class="pg-btn-states__label">Hover</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--secondary is-focus" tabindex="-1">Cancelar</button>
+                      <span class="pg-btn-states__label">Focus</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--secondary is-active" tabindex="-1">Cancelar</button>
+                      <span class="pg-btn-states__label">Pressed/Active</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--secondary" disabled>Cancelar</button>
+                      <span class="pg-btn-states__label">Disabled</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="pg-btn-states__group-title">Destructive</p>
+                  <div class="pg-btn-states__row">
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--destructive" tabindex="-1">Eliminar</button>
+                      <span class="pg-btn-states__label">Idle</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--destructive is-hover" tabindex="-1">Eliminar</button>
+                      <span class="pg-btn-states__label">Hover</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--destructive is-focus" tabindex="-1">Eliminar</button>
+                      <span class="pg-btn-states__label">Focus</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--destructive is-active" tabindex="-1">Eliminar</button>
+                      <span class="pg-btn-states__label">Pressed/Active</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--destructive" disabled>Eliminar</button>
+                      <span class="pg-btn-states__label">Disabled</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="pg-btn-states__group-title">Icon button</p>
+                  <div class="pg-btn-states__row">
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--icon" tabindex="-1">
+                        <span aria-hidden="true">&#8942;</span>
+                      </button>
+                      <span class="pg-btn-states__label">Idle</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--icon is-hover" tabindex="-1">
+                        <span aria-hidden="true">&#8942;</span>
+                      </button>
+                      <span class="pg-btn-states__label">Hover</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--icon is-focus" tabindex="-1">
+                        <span aria-hidden="true">&#8942;</span>
+                      </button>
+                      <span class="pg-btn-states__label">Focus</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--icon is-active" tabindex="-1">
+                        <span aria-hidden="true">&#8942;</span>
+                      </button>
+                      <span class="pg-btn-states__label">Pressed/Active</span>
+                    </div>
+                    <div class="pg-btn-states__item">
+                      <button type="button" class="c-btn c-btn--icon" disabled>
+                        <span aria-hidden="true">&#8942;</span>
+                      </button>
+                      <span class="pg-btn-states__label">Disabled</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="pg-notes">
@@ -385,6 +542,18 @@
                   Un botón con <code>disabled</code> sale del orden de tabulación y deja de
                   anunciarse como accionable; por eso una acción destructiva se confirma con un
                   diálogo en lugar de deshabilitarse silenciosamente.
+                </dd>
+
+                <dt>5 estados de affordance</dt>
+                <dd>
+                  Cada variante (Primary, Secondary, Destructive, Icon button) muestra sus 5
+                  estados —Idle, Hover, Focus, Pressed/Active y Disabled— uno junto al otro. Hover,
+                  Focus y Pressed/Active se fuerzan con clases auxiliares (<code>is-hover</code>,
+                  <code>is-focus</code>, <code>is-active</code>) para poder verlos sin necesidad de
+                  interactuar; Disabled usa el atributo real <code>disabled</code>. Esta franja de
+                  ejemplo lleva <code>aria-hidden="true"</code> y <code>tabindex="-1"</code> porque
+                  es solo una referencia visual: la versión real e interactiva, accesible por
+                  teclado, es la de la fila de arriba.
                 </dd>
               </dl>
             </div>
