@@ -214,6 +214,30 @@ ul {
   z-index: 100;
 }
 
+/* Gotas decorativas bajo el header */
+.corner-decor {
+  position: relative;
+  height: 5rem;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.corner-decor__drip {
+  position: absolute;
+  top: 0;
+  width: 9rem;
+  height: auto;
+}
+
+.corner-decor__drip--left {
+  left: 0;
+}
+
+.corner-decor__drip--right {
+  right: 0;
+  transform: scaleX(-1);
+}
+
 .site-header__top,
 .site-footer__main {
   max-width: var(--max-width);
