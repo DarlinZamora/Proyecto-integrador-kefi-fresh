@@ -7,8 +7,8 @@
   --color-surface: #ffffff;
   --color-text: #2c2c2c;
   --color-muted: #5c5c5c;
-  --color-accent: #6b8f71;
-  --color-accent-dark: #4f6f55;
+  --color-accent: #0097b2;
+  --color-accent-dark: #007a91;
   --color-border: #d8d2c8;
   --color-placeholder: #ece7df;
   --color-tag-bg: #eef4ef;
@@ -55,8 +55,8 @@
     --color-surface: #242420;
     --color-text: #f1efe9;
     --color-muted: #b8b3a8;
-    --color-accent: #6b8f71;
-    --color-accent-dark: #9fd6a8;
+    --color-accent: #0097b2;
+    --color-accent-dark: #4fc3d7;
     --color-border: #3d3d36;
     --color-placeholder: #2f2f29;
     --color-tag-bg: #2c3b2e;
@@ -71,8 +71,8 @@
   --color-surface: #242420;
   --color-text: #f1efe9;
   --color-muted: #b8b3a8;
-  --color-accent: #6b8f71;
-  --color-accent-dark: #9fd6a8;
+  --color-accent: #0097b2;
+  --color-accent-dark: #4fc3d7;
   --color-border: #3d3d36;
   --color-placeholder: #2f2f29;
   --color-tag-bg: #2c3b2e;
@@ -234,7 +234,7 @@ ul {
   font-size: var(--fs-xl);
   font-weight: 700;
   text-decoration: none;
-  color: var(--color-text);
+  color: var(--color-accent);
 }
 
 .site-header__actions {
@@ -378,6 +378,10 @@ main section {
   order: 3;
 }
 
+.hero__logo {
+  order: 4;
+}
+
 @media (min-width: 48rem) {
   .hero {
     display: grid;
@@ -385,7 +389,6 @@ main section {
     grid-template-areas: "text figure";
     align-items: center;
     gap: var(--space-md) var(--space-xl);
-    text-align: left;
   }
 
   .hero__text {
@@ -409,6 +412,15 @@ main section {
   font-family: var(--font-display);
   font-size: var(--fs-display-lg);
   margin: 0 0 var(--space-xs);
+  color: var(--color-accent);
+}
+
+.hero__title-logo {
+  display: block;
+  width: 100%;
+  max-width: 26rem;
+  height: auto;
+  margin: 0 auto;
 }
 
 .hero__tagline {
@@ -439,6 +451,13 @@ main section {
 .hero__bio {
   max-width: 40rem;
   margin: 0 auto;
+}
+
+.hero__logo {
+  display: block;
+  width: 14rem;
+  height: 14rem;
+  margin: var(--space-md) auto 0;
 }
 
 /* Placeholders de imagen */
@@ -584,10 +603,11 @@ main section {
 
 .tag {
   padding: 0.35rem var(--control-padding-y);
-  background: var(--color-tag-bg);
-  color: var(--color-accent-dark);
-  border-radius: 999px;
-  font-size: var(--fs-xs);
+  background: #e3f2fd;
+  color: #0d47a1;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 /* Testimonios */
@@ -725,9 +745,9 @@ main section {
 }
 
 .form-feedback--success {
-  background-color: #e8f5e9;
-  border-color: #a5d6a7;
-  color: #1b5e20;
+  background-color: #e0f7fa;
+  border-color: #4fc3d7;
+  color: #00596b;
 }
 
 .form-feedback--error {
@@ -835,6 +855,7 @@ main section {
   font-size: var(--fs-xl);
   font-weight: 700;
   margin: 0 0 var(--space-xs);
+  color: var(--color-accent);
 }
 
 .site-footer__tagline {
