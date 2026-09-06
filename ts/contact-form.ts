@@ -9,6 +9,7 @@
   const emailInput = form.querySelector<HTMLInputElement>("#email");
   const mensajeInput = form.querySelector<HTMLTextAreaElement>("#mensaje");
   const feedback = document.querySelector<HTMLElement>("[data-form-feedback]");
+  const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
 
   if (!nombreInput || !emailInput || !mensajeInput) return;
 
@@ -57,11 +58,34 @@
     return message === "";
   }
 
+  function clearFeedback(): void {
+    if (!feedback) return;
+    feedback.innerHTML = "";
+    feedback.classList.remove("form-feedback--success", "form-feedback--error");
+  }
+
   function setFeedback(message: string, kind: "success" | "error"): void {
     if (!feedback) return;
-    feedback.textContent = message;
-    feedback.classList.remove("form-feedback--success", "form-feedback--error");
+    clearFeedback();
     feedback.classList.add(kind === "success" ? "form-feedback--success" : "form-feedback--error");
+
+    const icon = document.createElement("span");
+    icon.className = "form-feedback__icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = kind === "success" ? "✓" : "!";
+
+    const messageEl = document.createElement("span");
+    messageEl.className = "form-feedback__message";
+    messageEl.textContent = message;
+
+    const closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.className = "form-feedback__close";
+    closeButton.setAttribute("aria-label", "Cerrar aviso");
+    closeButton.textContent = "✕";
+    closeButton.addEventListener("click", clearFeedback);
+
+    feedback.append(icon, messageEl, closeButton);
   }
 
   for (const entry of fields) {
@@ -88,6 +112,16 @@
     form.reset();
     for (const entry of fields) {
       showFieldError(entry.input, "");
+    }
+
+    if (submitButton) {
+      const originalText = submitButton.textContent;
+      submitButton.textContent = "Enviado";
+      submitButton.disabled = true;
+      window.setTimeout(() => {
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+      }, 2500);
     }
   });
 })();
