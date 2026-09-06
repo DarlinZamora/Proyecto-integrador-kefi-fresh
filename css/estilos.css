@@ -320,6 +320,29 @@ ul {
   transform: translateX(0);
 }
 
+.nav {
+  scrollbar-width: thin;
+  scrollbar-color: #0097b2 transparent;
+}
+
+.nav::-webkit-scrollbar {
+  width: 10px;
+}
+
+.nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nav::-webkit-scrollbar-thumb {
+  background-color: #0097b2;
+  border-radius: 20px;
+  border: 2px solid var(--color-surface);
+}
+
+.nav::-webkit-scrollbar-thumb:hover {
+  background-color: #007a91;
+}
+
 .nav__list {
   display: flex;
   flex-direction: column;
@@ -350,6 +373,12 @@ main section {
 
 .products {
   max-width: 80rem;
+}
+
+.fruit-divider {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .section-title {
@@ -455,8 +484,9 @@ main section {
 
 .hero__logo {
   display: block;
-  width: 14rem;
-  height: 14rem;
+  width: 20rem;
+  height: 20rem;
+  max-width: 100%;
   margin: var(--space-md) auto 0;
 }
 
