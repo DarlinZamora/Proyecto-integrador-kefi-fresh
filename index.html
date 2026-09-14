@@ -221,6 +221,7 @@
               type="button"
               class="btn btn--icon btn--circle carousel__button"
               data-carousel-prev
+              data-mixpanel-event="carousel_prev_clicked"
               aria-label="Producto anterior"
             >
               &#8592;
@@ -234,6 +235,7 @@
                 aria-selected="true"
                 aria-controls="producto-slide-1"
                 data-carousel-dot="0"
+                data-mixpanel-event="carousel_dot_clicked"
               >
                 <span class="visually-hidden">Producto 1</span>
               </button>
@@ -244,6 +246,7 @@
                 aria-selected="false"
                 aria-controls="producto-slide-2"
                 data-carousel-dot="1"
+                data-mixpanel-event="carousel_dot_clicked"
               >
                 <span class="visually-hidden">Producto 2</span>
               </button>
@@ -254,6 +257,7 @@
                 aria-selected="false"
                 aria-controls="producto-slide-3"
                 data-carousel-dot="2"
+                data-mixpanel-event="carousel_dot_clicked"
               >
                 <span class="visually-hidden">Producto 3</span>
               </button>
@@ -263,6 +267,7 @@
               type="button"
               class="btn btn--icon btn--circle carousel__button"
               data-carousel-next
+              data-mixpanel-event="carousel_next_clicked"
               aria-label="Producto siguiente"
             >
               &#8594;
@@ -406,17 +411,17 @@
           <p id="social-label" class="site-footer__social-label">Redes sociales</p>
           <ul class="social-list" aria-labelledby="social-label">
             <li>
-              <a href="#" class="btn btn--icon social-link" aria-label="Instagram de Kefi-Fresh">
+              <a href="#" class="btn btn--icon social-link" aria-label="Instagram de Kefi-Fresh" data-mixpanel-event="instagram_clicked">
                 <img class="social-link__icon" src="img/instagram.avif" alt="" aria-hidden="true" width="24" height="24" />
               </a>
             </li>
             <li>
-              <a href="#" class="btn btn--icon social-link" aria-label="Facebook de Kefi-Fresh">
+              <a href="#" class="btn btn--icon social-link" aria-label="Facebook de Kefi-Fresh" data-mixpanel-event="facebook_clicked">
                 <img class="social-link__icon" src="img/facebook.avif" alt="" aria-hidden="true" width="24" height="24" />
               </a>
             </li>
             <li>
-              <a href="#" class="btn btn--icon social-link" aria-label="WhatsApp de Kefi-Fresh">
+              <a href="#" class="btn btn--icon social-link" aria-label="WhatsApp de Kefi-Fresh" data-mixpanel-event="whatsapp_clicked">
                 <img class="social-link__icon" src="img/whatsapp.avif" alt="" aria-hidden="true" width="24" height="24" />
               </a>
             </li>
@@ -433,14 +438,6 @@
     <script src="js/nav.js"></script>
     <script src="js/main.js"></script>
     <script src="js/contact-form.js"></script>
-    <script>
-      document.querySelectorAll("[data-mixpanel-event]").forEach(function (el) {
-        el.addEventListener("click", function () {
-          if (window.mixpanel && typeof mixpanel.track === "function") {
-            mixpanel.track(el.dataset.mixpanelEvent);
-          }
-        });
-      });
-    </script>
+    <script src="js/mixpanel-events.js"></script>
   </body>
 </html>

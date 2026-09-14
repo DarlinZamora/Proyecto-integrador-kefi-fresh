@@ -13,6 +13,13 @@
 
   if (!nombreInput || !emailInput || !mensajeInput) return;
 
+  function trackMixpanelEvent(eventName: string, properties?: Record<string, unknown>): void {
+    const mixpanel = (window as any).mixpanel;
+    if (mixpanel && typeof mixpanel.track === "function") {
+      mixpanel.track(eventName, properties);
+    }
+  }
+
   type Field = {
     input: HTMLInputElement | HTMLTextAreaElement;
     validate: (value: string) => string;
@@ -105,10 +112,14 @@
     if (invalidFields.length > 0) {
       invalidFields[0].input.focus();
       setFeedback("Revisa los campos marcados antes de continuar.", "error");
+      trackMixpanelEvent("contacto_form_error", {
+        campos_invalidos: invalidFields.map((entry) => entry.input.id),
+      });
       return;
     }
 
     setFeedback("¡Gracias! Tu mensaje fue enviado, te contactaré pronto.", "success");
+    trackMixpanelEvent("contacto_form_enviado");
     form.reset();
     for (const entry of fields) {
       showFieldError(entry.input, "");

@@ -13,6 +13,12 @@
     const submitButton = form.querySelector('button[type="submit"]');
     if (!nombreInput || !emailInput || !mensajeInput)
         return;
+    function trackMixpanelEvent(eventName, properties) {
+        const mixpanel = window.mixpanel;
+        if (mixpanel && typeof mixpanel.track === "function") {
+            mixpanel.track(eventName, properties);
+        }
+    }
     function validateNombre(value) {
         if (!value)
             return "Ingresa tu nombre.";
@@ -93,9 +99,13 @@
         if (invalidFields.length > 0) {
             invalidFields[0].input.focus();
             setFeedback("Revisa los campos marcados antes de continuar.", "error");
+            trackMixpanelEvent("contacto_form_error", {
+                campos_invalidos: invalidFields.map((entry) => entry.input.id),
+            });
             return;
         }
         setFeedback("¡Gracias! Tu mensaje fue enviado, te contactaré pronto.", "success");
+        trackMixpanelEvent("contacto_form_enviado");
         form.reset();
         for (const entry of fields) {
             showFieldError(entry.input, "");
