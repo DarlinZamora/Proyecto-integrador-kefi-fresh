@@ -3,7 +3,7 @@
    ========================================================================== */
 
 :root {
-  --color-bg: #faf8f5;
+  --color-bg: #fcf6e8;
   --color-surface: #ffffff;
   --color-text: #2c2c2c;
   --color-muted: #5c5c5c;
@@ -269,12 +269,16 @@ ul {
 
 .site-header__login {
   display: none;
+  font: inherit;
   font-size: var(--fs-sm);
   text-decoration: none;
+  color: var(--color-text);
+  background: var(--color-surface);
   padding: 0.4rem 0.9rem;
   border: 1px solid var(--color-border);
   border-radius: 12px;
   box-shadow: var(--shadow);
+  cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -384,17 +388,247 @@ ul {
   list-style: none;
 }
 
-.nav__list a {
+.nav__list a,
+.nav__list button {
   display: inline-block;
   padding: var(--space-xs);
+  border: none;
+  background: transparent;
   text-decoration: none;
   color: var(--color-text);
+  font: inherit;
   font-weight: 500;
+  text-align: left;
+  cursor: pointer;
 }
 
 .nav__list a:hover,
-.nav__list a:focus-visible {
+.nav__list a:focus-visible,
+.nav__list button:hover,
+.nav__list button:focus-visible {
   color: var(--color-accent-dark);
+}
+
+/* Modal de inicio de sesión: <dialog> nativo, mismo patrón que documenta playground.html */
+.login-dialog {
+  /* position: fixed (no relative): un <dialog> modal debe centrarse sobre el
+     viewport completo, no quedar anclado a su posición en el flujo del documento. */
+  position: fixed;
+  inset: 0;
+  width: min(40rem, 92vw);
+  max-width: 40rem;
+  height: fit-content;
+  max-height: 88vh;
+  margin: auto;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow);
+  overflow: auto;
+}
+
+.login-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.login-dialog__close {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  z-index: 1;
+}
+
+.login-dialog__layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-dialog__mascot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg) var(--space-md) var(--space-sm);
+  background: var(--color-bg);
+}
+
+.login-dialog__mascot img {
+  width: 9rem;
+  height: 9rem;
+  object-fit: contain;
+}
+
+.login-dialog__panel {
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+}
+
+.login-dialog__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  margin: 0 0 var(--space-xs);
+}
+
+.login-dialog__subtitle {
+  color: var(--color-muted);
+  margin: 0 0 var(--space-md);
+}
+
+.login-dialog__gmail {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.login-dialog__gmail-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--color-on-accent);
+  flex: 0 0 auto;
+}
+
+.login-dialog__divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0;
+  color: var(--color-muted);
+  font-size: var(--fs-sm);
+}
+
+.login-dialog__divider::before,
+.login-dialog__divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.login-dialog__email-wrap {
+  position: relative;
+}
+
+.login-dialog__email-wrap input {
+  width: 100%;
+  padding: var(--control-padding-y) 3rem var(--control-padding-y) var(--control-padding-y);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+.login-dialog__email-submit {
+  position: absolute;
+  top: 50%;
+  right: 0.35rem;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.login-dialog__email-submit:hover {
+  background: var(--color-tag-bg);
+  color: var(--color-accent);
+}
+
+.login-dialog__checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: var(--space-md) 0 var(--space-sm);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.login-dialog__checkbox input {
+  accent-color: var(--color-accent);
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.login-dialog__terms {
+  font-size: var(--fs-xs);
+  color: var(--color-muted);
+  margin: 0;
+}
+
+@media (min-width: 40rem) {
+  .login-dialog__layout {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .login-dialog__mascot {
+    flex: 0 0 38%;
+    padding: var(--space-lg);
+  }
+
+  .login-dialog__panel {
+    flex: 1;
+    text-align: left;
+  }
+
+  .login-dialog__subtitle {
+    margin-bottom: var(--space-lg);
+  }
+
+  .login-dialog__divider,
+  .login-dialog__checkbox {
+    justify-content: flex-start;
+  }
+}
+
+/* Modal del certificado: mismo <dialog> nativo que el de inicio de sesión */
+.cert-dialog {
+  position: fixed;
+  inset: 0;
+  width: min(40rem, 94vw);
+  max-width: 40rem;
+  height: fit-content;
+  max-height: 92vh;
+  overflow-y: auto;
+  margin: auto;
+  padding: var(--space-md);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow);
+}
+
+.cert-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.cert-dialog__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  margin: 0 0 var(--space-sm);
+  padding-right: var(--space-xl);
+}
+
+.cert-dialog__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
 }
 
 /* Secciones principales */
@@ -545,10 +779,12 @@ main section {
 
 /* Carrusel */
 .carousel {
-  margin-bottom: var(--space-lg);
+  max-width: 36rem;
+  margin: 0 auto var(--space-lg);
 }
 
 .carousel__viewport {
+  position: relative;
   overflow: hidden;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -557,7 +793,7 @@ main section {
 .carousel__track {
   display: flex;
   list-style: none;
-  transition: transform 0.35s ease;
+  transition: transform 0.6s ease;
 }
 
 .carousel__slide {
@@ -629,6 +865,7 @@ main section {
 }
 
 .product-detail__media {
+  position: relative;
   margin: 0;
 }
 
@@ -638,6 +875,24 @@ main section {
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: var(--radius);
+}
+
+/* Insignia de producto más vendido */
+.product-badge {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.7rem;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  box-shadow: var(--shadow);
 }
 
 .product-detail__content h2,
@@ -671,6 +926,278 @@ main section {
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+/* Buscador de productos por categoría (productos.html) */
+.product-filter {
+  max-width: 40rem;
+  margin: 0 auto var(--space-sm);
+}
+
+.product-filter__input-wrap {
+  position: relative;
+  margin-bottom: var(--space-sm);
+}
+
+.product-filter__icon {
+  position: absolute;
+  top: 50%;
+  left: var(--control-padding-y);
+  transform: translateY(-50%);
+  color: var(--color-muted);
+  pointer-events: none;
+}
+
+.product-filter__input {
+  width: 100%;
+  padding: var(--control-padding-y) var(--control-padding-y) var(--control-padding-y) 2.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.product-filter__input:hover,
+.product-filter__input:focus {
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12);
+}
+
+.product-filter__chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+
+.product-filter__chip {
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.product-filter__chip.is-active {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.product-filter__empty {
+  text-align: center;
+  color: var(--color-muted);
+  margin: 0 0 var(--space-md);
+}
+
+/* Grilla de productos de productos.html (varias tarjetas, sin carrusel) */
+.products__grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+/* Dentro de la grilla cada tarjeta apila imagen y contenido: son más angostas
+   que el detalle único de index.html, que sí usa 2 columnas en pantallas grandes. */
+.products__grid .product-detail {
+  grid-template-columns: 1fr;
+}
+
+/* .product-detail fuerza display:grid, así que el atributo [hidden] del buscador
+   necesita más especificidad para ganarle y ocultar la tarjeta de verdad. */
+.products__grid .product-detail[hidden] {
+  display: none;
+}
+
+.product-detail__actions {
+  margin-top: var(--space-sm);
+}
+
+/* Botón "Agregar al carrito" */
+.cart-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: auto;
+}
+
+.cart-add__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+/* Botón de carrito en el header, con contador de artículos */
+.cart-toggle {
+  position: relative;
+}
+
+.cart-toggle__badge {
+  position: absolute;
+  top: -0.3rem;
+  right: -0.3rem;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding: 0 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Fondo oscurecido detrás del panel de carrito: mismo patrón que .nav-backdrop */
+.cart-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 250;
+}
+
+.cart-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Panel de carrito: mismo patrón de drawer que .nav */
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(24rem, 90vw);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  z-index: 300;
+  padding: var(--space-md);
+}
+
+.cart-drawer.is-open {
+  transform: translateX(0);
+}
+
+.cart-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.cart-drawer__header h2 {
+  margin: 0;
+  font-size: var(--fs-lg);
+}
+
+.cart-drawer__list {
+  list-style: none;
+  margin: 0 0 var(--space-md);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.cart-drawer__empty {
+  color: var(--color-muted);
+  text-align: center;
+  margin: var(--space-lg) 0;
+}
+
+.cart-drawer__footer {
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.cart-drawer__total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: var(--fs-md);
+  margin: 0 0 var(--space-sm);
+}
+
+.cart-drawer__checkout.is-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto auto;
+  align-items: center;
+  gap: var(--space-xs);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cart-item__photo {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.cart-item__info {
+  min-width: 0;
+}
+
+.cart-item__name {
+  margin: 0;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+}
+
+.cart-item__price {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+}
+
+.cart-item__qty {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cart-item__qty .btn--icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: var(--fs-base);
+}
+
+.cart-item__remove {
+  border: none;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: var(--fs-lg);
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.cart-item__remove:hover {
+  color: var(--color-error);
+}
+
+@media (min-width: 30rem) {
+  .products__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .products__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Testimonios */
@@ -903,14 +1430,118 @@ main section {
   margin-top: var(--space-lg);
 }
 
-.site-footer a {
+.site-footer a,
+.site-footer button {
   color: var(--color-footer-text);
 }
 
-.site-footer__main {
+/* Círculo con el logo/mascota, centrado sobre las columnas */
+.site-footer__logo {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-lg);
+}
+
+.site-footer__logo img {
+  width: 7rem;
+  height: 7rem;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+}
+
+.site-footer__columns {
   display: grid;
-  gap: var(--space-md);
-  padding-block: var(--space-lg);
+  gap: var(--space-lg) var(--space-md);
+  padding: var(--space-lg) var(--space-sm);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.site-footer__column-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  margin: 0 0 var(--space-sm);
+}
+
+.site-footer__link-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer__link-list a,
+.site-footer__link-list button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  text-decoration: none;
+  color: var(--color-footer-muted);
+  cursor: pointer;
+}
+
+.site-footer__link-list a:hover,
+.site-footer__link-list a:focus-visible,
+.site-footer__link-list button:hover,
+.site-footer__link-list button:focus-visible {
+  color: var(--color-footer-text);
+}
+
+.site-footer__link-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 auto;
+}
+
+/* Insignia del certificado: logo de ESPOL sobre una tarjeta clara */
+.site-footer__cert-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 10rem;
+  aspect-ratio: 16 / 10;
+  margin-bottom: var(--space-sm);
+  padding: var(--space-sm);
+  background: var(--color-bg);
+  border-radius: var(--radius);
+}
+
+.site-footer__cert-badge img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.site-footer__cert-link {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  font-size: var(--fs-sm);
+  color: var(--color-footer-muted);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.site-footer__cert-link:hover,
+.site-footer__cert-link:focus-visible {
+  color: var(--color-footer-text);
+}
+
+.site-footer__brand {
+  text-align: center;
+  padding: 0 var(--space-sm) var(--space-md);
 }
 
 .site-footer__name {
@@ -926,36 +1557,6 @@ main section {
   color: var(--color-footer-muted);
 }
 
-.site-footer__social-label {
-  margin: 0 0 var(--space-sm);
-  font-weight: 600;
-}
-
-.social-list {
-  display: flex;
-  gap: var(--space-sm);
-  list-style: none;
-}
-
-/* .social-link usa .btn .btn--icon; el fondo translúcido es propio del footer */
-.social-link {
-  background: var(--color-social-bg);
-  text-decoration: none;
-}
-
-.social-link:hover,
-.social-link:focus-visible {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
-.social-link__icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .site-footer__copyright {
   margin: 0;
   padding: var(--space-sm);
@@ -964,11 +1565,17 @@ main section {
   background: rgba(0, 0, 0, 0.25);
 }
 
+@media (min-width: 30rem) {
+  .site-footer__columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Responsive — tablet y desktop */
 @media (min-width: 48rem) {
   .site-header__top,
   main section,
-  .site-footer__main {
+  .site-footer__columns {
     padding-inline: var(--space-md);
   }
 
@@ -986,9 +1593,8 @@ main section {
     text-align: left;
   }
 
-  .site-footer__main {
-    grid-template-columns: 1fr auto;
-    align-items: start;
+  .site-footer__columns {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
