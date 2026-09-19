@@ -1,61 +1,113 @@
 /* Checkboxes y radios — filtro de tabla y opción única */
 
 .c-check-group {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 .c-check-group legend {
+  margin-bottom: var(--space-2);
+  padding: 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 .c-check {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .c-check input[type="checkbox"] {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
 }
 
 .c-check input[type="checkbox"]:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
 }
 
 .c-check label {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  cursor: pointer;
 }
 
 .c-radio-group {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 .c-radio-group legend {
+  margin-bottom: var(--space-2);
+  padding: 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 .c-radio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .c-radio input[type="radio"] {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
 }
 
 .c-radio input[type="radio"]:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
 }
 
 .c-radio label {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  cursor: pointer;
 }
 
 /* Tablet */
 @media (max-width: 768px) {
   .c-check-group {
+    gap: var(--space-3);
   }
 
   .c-radio-group {
+    gap: var(--space-3);
   }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
   .c-check-group {
+    gap: var(--space-3);
   }
 
   .c-check {
+    gap: var(--space-2);
   }
 
   .c-radio-group {
+    gap: var(--space-3);
   }
 
   .c-radio {
+    gap: var(--space-2);
   }
 }

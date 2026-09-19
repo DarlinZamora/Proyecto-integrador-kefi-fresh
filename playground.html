@@ -282,10 +282,12 @@
           <ul class="pg-aside__list">
             <li><a href="#seccion-alerts">Alerts</a></li>
             <li><a href="#seccion-botones">Botones</a></li>
+            <li><a href="#seccion-inputs">Inputs</a></li>
             <li><a href="#seccion-checkboxes-radios">Checkboxes/Radios</a></li>
             <li><a href="#seccion-dialogs">Dialogs</a></li>
             <li><a href="#seccion-menus">Menús</a></li>
             <li><a href="#seccion-toasts">Toasts</a></li>
+            <li><a href="#seccion-graficos">Gráficos</a></li>
           </ul>
         </nav>
       </aside>
@@ -574,7 +576,100 @@
           </div>
         </section>
 
-        <!-- 3. CHECKBOXES / RADIOS -->
+        <!-- 3. INPUTS -->
+        <section class="pg-section" id="seccion-inputs" aria-labelledby="titulo-inputs">
+          <h2 class="pg-section__title" id="titulo-inputs">Inputs</h2>
+
+          <div class="pg-columns">
+            <div>
+              <h3 class="pg-column__title">Componente</h3>
+              <div class="pg-demo">
+                <div class="c-field">
+                  <label for="campo-nombre">Nombre del producto</label>
+                  <input type="text" id="campo-nombre" name="nombre" value="Dulce Amor" />
+                </div>
+
+                <div class="c-field">
+                  <label for="campo-precio">Precio</label>
+                  <input
+                    type="text"
+                    id="campo-precio"
+                    name="precio"
+                    aria-describedby="campo-precio-ayuda"
+                  />
+                  <p class="c-field-hint" id="campo-precio-ayuda">
+                    Usa punto decimal, sin símbolo de moneda.
+                  </p>
+                </div>
+
+                <div class="c-field">
+                  <label for="campo-stock">Stock mínimo</label>
+                  <input
+                    type="text"
+                    id="campo-stock"
+                    name="stock"
+                    value="-5"
+                    aria-invalid="true"
+                    aria-describedby="campo-stock-error"
+                  />
+                  <p class="c-field-error" id="campo-stock-error">
+                    El stock mínimo no puede ser negativo.
+                  </p>
+                </div>
+
+                <div class="c-field">
+                  <label for="campo-categoria">Categoría</label>
+                  <select id="campo-categoria" name="categoria">
+                    <option>Postres</option>
+                    <option>Meriendas</option>
+                    <option>Artesanales</option>
+                  </select>
+                </div>
+
+                <div class="c-field">
+                  <label for="campo-notas">Notas internas</label>
+                  <textarea id="campo-notas" name="notas" rows="3" disabled>No editable para este rol.</textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="pg-notes">
+              <h3 class="pg-column__title">Comportamiento de teclado y foco</h3>
+              <dl>
+                <dt>Orden de foco</dt>
+                <dd>
+                  <kbd>Tab</kbd> avanza y <kbd>Mayús</kbd> + <kbd>Tab</kbd> retrocede entre campos
+                  en el orden del DOM. Escribir, pegar y navegar dentro del texto usa las teclas
+                  normales del sistema operativo, sin JavaScript adicional.
+                </dd>
+
+                <dt>Etiqueta y área de clic</dt>
+                <dd>
+                  Cada <code>&lt;label for&gt;</code> apunta al <code>id</code> de su campo, así
+                  que hacer clic en el texto de la etiqueta enfoca el input, igual que en
+                  checkboxes y radios.
+                </dd>
+
+                <dt>Ayuda y error</dt>
+                <dd>
+                  El texto de ayuda y el mensaje de error se asocian con
+                  <code>aria-describedby</code>, así el lector de pantalla los anuncia junto con el
+                  campo al enfocarlo. <code>aria-invalid="true"</code> marca el campo con error
+                  tanto visualmente (borde en color de error) como para tecnología asistiva.
+                </dd>
+
+                <dt>Campo deshabilitado</dt>
+                <dd>
+                  Un campo con <code>disabled</code> sale del orden de <kbd>Tab</kbd> y no se
+                  envía con el formulario. Se usa solo cuando el dato no es editable para el rol
+                  actual, nunca para ocultar temporalmente una acción disponible.
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. CHECKBOXES / RADIOS -->
         <section
           class="pg-section"
           id="seccion-checkboxes-radios"
@@ -691,7 +786,7 @@
           </div>
         </section>
 
-        <!-- 4. DIALOGS -->
+        <!-- 5. DIALOGS -->
         <section class="pg-section" id="seccion-dialogs" aria-labelledby="titulo-dialogs">
           <h2 class="pg-section__title" id="titulo-dialogs">Dialogs</h2>
 
@@ -775,7 +870,7 @@
           </div>
         </section>
 
-        <!-- 5. MENÚS -->
+        <!-- 6. MENÚS -->
         <section class="pg-section" id="seccion-menus" aria-labelledby="titulo-menus">
           <h2 class="pg-section__title" id="titulo-menus">Menús</h2>
 
@@ -880,7 +975,7 @@
           </div>
         </section>
 
-        <!-- 6. TOASTS -->
+        <!-- 7. TOASTS -->
         <section class="pg-section" id="seccion-toasts" aria-labelledby="titulo-toasts">
           <h2 class="pg-section__title" id="titulo-toasts">Toasts</h2>
 
@@ -937,6 +1032,242 @@
                   El contenedor mantiene como máximo tres toasts a la vez; al llegar el cuarto se
                   retira el más antiguo. Así la región <code>aria-live</code> no encola una ráfaga
                   de anuncios que el usuario ya no puede seguir.
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. GRÁFICOS -->
+        <section class="pg-section" id="seccion-graficos" aria-labelledby="titulo-graficos">
+          <h2 class="pg-section__title" id="titulo-graficos">Gráficos</h2>
+
+          <div class="pg-columns">
+            <div>
+              <h3 class="pg-column__title">Componente</h3>
+              <div class="pg-demo" style="display: grid; gap: 1.5rem; width: 100%">
+                <div class="c-stat-row">
+                  <div class="c-stat-tile">
+                    <p class="c-stat-tile-label">Ventas hoy</p>
+                    <p class="c-stat-tile-value">$284.50</p>
+                    <p class="c-stat-tile-delta c-stat-tile-delta--good">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">
+                        <path d="M5 1 L9 7 L1 7 Z"></path>
+                      </svg>
+                      +8%
+                      <span class="c-stat-tile-delta-context">vs. ayer</span>
+                    </p>
+                    <svg
+                      class="c-stat-tile-trend"
+                      viewBox="0 0 64 24"
+                      role="img"
+                      aria-label="Tendencia: por debajo de la semana pasada al inicio, por encima al cierre"
+                    >
+                      <polyline
+                        class="is-previous"
+                        points="2,14 12,10 22,16 32,11 42,15 52,12 62,16"
+                      ></polyline>
+                      <polyline
+                        class="is-current"
+                        points="2,16 12,12 22,9 32,14 42,8 52,6 62,4"
+                      ></polyline>
+                    </svg>
+                  </div>
+
+                  <div class="c-stat-tile">
+                    <p class="c-stat-tile-label">Pedidos hoy</p>
+                    <p class="c-stat-tile-value">18</p>
+                    <p class="c-stat-tile-delta c-stat-tile-delta--good">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">
+                        <path d="M5 1 L9 7 L1 7 Z"></path>
+                      </svg>
+                      +2
+                      <span class="c-stat-tile-delta-context">vs. ayer</span>
+                    </p>
+                  </div>
+
+                  <div class="c-stat-tile">
+                    <p class="c-stat-tile-label">Stock crítico</p>
+                    <p class="c-stat-tile-value">3</p>
+                    <p class="c-stat-tile-delta c-stat-tile-delta--critical">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">
+                        <path d="M5 9 L1 3 L9 3 Z"></path>
+                      </svg>
+                      productos
+                      <span class="c-stat-tile-delta-context">bajo el mínimo</span>
+                    </p>
+                  </div>
+                </div>
+
+                <figure class="c-chart-card">
+                  <figcaption class="c-chart-title">
+                    Ventas por categoría <span class="c-chart-subtitle">esta semana</span>
+                  </figcaption>
+
+                  <div class="c-bar-chart-plot">
+                    <div class="c-bar" tabindex="0" aria-label="Postres: $612">
+                      <span class="c-bar-value">$612</span>
+                      <span class="c-bar-fill" style="height: 100%"></span>
+                    </div>
+                    <div class="c-bar" tabindex="0" aria-label="Meriendas: $580">
+                      <span class="c-bar-value">$580</span>
+                      <span class="c-bar-fill" style="height: 95%"></span>
+                    </div>
+                    <div class="c-bar" tabindex="0" aria-label="Artesanales: $345">
+                      <span class="c-bar-value">$345</span>
+                      <span class="c-bar-fill" style="height: 56%"></span>
+                    </div>
+                  </div>
+                  <div class="c-bar-chart-axis">
+                    <span>Postres</span>
+                    <span>Meriendas</span>
+                    <span>Artesanales</span>
+                  </div>
+
+                  <table class="visually-hidden">
+                    <caption>Ventas por categoría, esta semana</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Ventas</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Postres</td>
+                        <td>$612</td>
+                      </tr>
+                      <tr>
+                        <td>Meriendas</td>
+                        <td>$580</td>
+                      </tr>
+                      <tr>
+                        <td>Artesanales</td>
+                        <td>$345</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </figure>
+
+                <figure class="c-chart-card">
+                  <figcaption class="c-chart-title">
+                    Tendencia de ventas <span class="c-chart-subtitle">últimos 7 días</span>
+                  </figcaption>
+
+                  <svg class="c-line-chart" viewBox="0 0 480 176" role="img" aria-labelledby="titulo-tendencia">
+                    <title id="titulo-tendencia">Ventas diarias, de lunes a domingo, en alza</title>
+
+                    <line class="c-line-grid" x1="34" y1="24" x2="470" y2="24"></line>
+                    <line class="c-line-grid" x1="34" y1="85" x2="470" y2="85"></line>
+                    <line class="c-line-grid" x1="34" y1="146" x2="470" y2="146"></line>
+
+                    <text class="c-line-axis-label" x="30" y="27" text-anchor="end">$300</text>
+                    <text class="c-line-axis-label" x="30" y="88" text-anchor="end">$150</text>
+                    <text class="c-line-axis-label" x="30" y="149" text-anchor="end">$0</text>
+
+                    <text class="c-line-axis-label" x="34" y="163" text-anchor="middle">Lun</text>
+                    <text class="c-line-axis-label" x="106.7" y="163" text-anchor="middle">Mar</text>
+                    <text class="c-line-axis-label" x="179.3" y="163" text-anchor="middle">Mié</text>
+                    <text class="c-line-axis-label" x="252" y="163" text-anchor="middle">Jue</text>
+                    <text class="c-line-axis-label" x="324.7" y="163" text-anchor="middle">Vie</text>
+                    <text class="c-line-axis-label" x="397.3" y="163" text-anchor="middle">Sáb</text>
+                    <text class="c-line-axis-label" x="470" y="163" text-anchor="middle">Dom</text>
+
+                    <path
+                      class="c-line-path"
+                      d="M34,72.8 L106.7,66.7 L179.3,60.6 L252,74.8 L324.7,52.5 L397.3,39.0 L470,30.3"
+                    ></path>
+
+                    <circle class="c-line-hit" tabindex="0" cx="34" cy="72.8" r="10"><title>Lunes: $180</title></circle>
+                    <circle class="c-line-hit" tabindex="0" cx="106.7" cy="66.7" r="10"><title>Martes: $195</title></circle>
+                    <circle class="c-line-hit" tabindex="0" cx="179.3" cy="60.6" r="10"><title>Miércoles: $210</title></circle>
+                    <circle class="c-line-hit" tabindex="0" cx="252" cy="74.8" r="10"><title>Jueves: $175</title></circle>
+                    <circle class="c-line-hit" tabindex="0" cx="324.7" cy="52.5" r="10"><title>Viernes: $230</title></circle>
+                    <circle class="c-line-hit" tabindex="0" cx="397.3" cy="39.0" r="10"><title>Sábado: $263</title></circle>
+                    <circle class="c-line-hit" tabindex="0" cx="470" cy="30.3" r="10"><title>Domingo (hoy): $284.50</title></circle>
+                    <circle class="c-line-dot" cx="470" cy="30.3" r="5"></circle>
+
+                    <text class="c-line-end-label" x="464" y="18" text-anchor="end">$284.50</text>
+                  </svg>
+
+                  <table class="visually-hidden">
+                    <caption>Ventas diarias, últimos 7 días</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Día</th>
+                        <th scope="col">Ventas</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Lunes</td>
+                        <td>$180.00</td>
+                      </tr>
+                      <tr>
+                        <td>Martes</td>
+                        <td>$195.00</td>
+                      </tr>
+                      <tr>
+                        <td>Miércoles</td>
+                        <td>$210.00</td>
+                      </tr>
+                      <tr>
+                        <td>Jueves</td>
+                        <td>$175.00</td>
+                      </tr>
+                      <tr>
+                        <td>Viernes</td>
+                        <td>$230.00</td>
+                      </tr>
+                      <tr>
+                        <td>Sábado</td>
+                        <td>$263.00</td>
+                      </tr>
+                      <tr>
+                        <td>Domingo (hoy)</td>
+                        <td>$284.50</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </figure>
+              </div>
+            </div>
+
+            <div class="pg-notes">
+              <h3 class="pg-column__title">Comportamiento de teclado y foco</h3>
+              <dl>
+                <dt>Los stat tiles no son interactivos</dt>
+                <dd>
+                  Son la única excepción a la regla de foco de esta página: un número, su
+                  variación y una minigráfica de tendencia no necesitan foco propio porque no
+                  hay nada que activar. El color de la variación nunca va solo — siempre lleva un
+                  ícono de flecha y la palabra de contexto («vs. ayer», «bajo el mínimo»).
+                </dd>
+
+                <dt>Barras: foco y valor siempre visibles</dt>
+                <dd>
+                  Cada barra es alcanzable con <kbd>Tab</kbd> y muestra un anillo de foco propio.
+                  Con solo tres categorías, el valor se etiqueta directamente sobre cada barra en
+                  vez de esconderse detrás de un hover — nadie necesita apuntar con el mouse para
+                  leer el dato.
+                </dd>
+
+                <dt>Línea: qué pasa sin mouse</dt>
+                <dd>
+                  Cada punto lleva un <code>&lt;title&gt;</code> nativo con el día y el valor,
+                  visible al pasar el mouse. Un lector de pantalla no depende de eso: la tabla
+                  oculta (<code>.visually-hidden</code>) que acompaña a cada gráfico repite los
+                  mismos datos en un formato que sí es focoable y navegable por fila. Un
+                  crosshair con teclado propio queda pendiente de que el playground tenga su
+                  propio JavaScript.
+                </dd>
+
+                <dt>Nunca solo el gráfico</dt>
+                <dd>
+                  Ni la barra ni la línea son la única forma de leer un valor: ambas tienen su
+                  tabla equivalente oculta visualmente pero presente en el DOM, que es lo que
+                  usa un lector de pantalla para anunciar «Postres, 612 dólares» sin depender del
+                  color ni de la posición del trazo.
                 </dd>
               </dl>
             </div>

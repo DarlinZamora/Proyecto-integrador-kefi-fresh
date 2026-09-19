@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Design tokens | Backoffice Ke-Fresh</title>
+  <style>
+    :root {
+      --color-bg: #faf8f5;
+      --color-surface: #ffffff;
+      --color-text: #2c2c2c;
+      --color-muted: #5c5c5c;
+      --color-accent: #6b8f71;
+      --color-accent-dark: #4f6f55;
+      --color-border: #d8d2c8;
+      --color-on-accent: #ffffff;
+
+      --color-success: #4f6f55;
+      --color-success-bg: #eef4ef;
+      --color-success-border: #bcd6c1;
+      --color-error: #c0392b;
+      --color-error-bg: #fbeae7;
+      --color-error-border: #eabdb6;
+      --color-danger-dark: #942a1f;
+      --color-warning: #a86a1d;
+      --color-warning-bg: #fbf1de;
+      --color-warning-border: #e9cd9a;
+      --color-info: #2f6690;
+      --color-info-bg: #e8f1f7;
+      --color-info-border: #b9d4e6;
+
+      --color-focus-ring: #2f6690;
+      --color-overlay: rgba(28, 28, 26, 0.5);
+
+      --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --font-display: Georgia, "Times New Roman", serif;
+
+      --radius-sm: 6px;
+      --radius: 12px;
+      --radius-pill: 999px;
+
+      --shadow-elevated: 0 1rem 3rem rgba(0, 0, 0, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+    }
+
+    a { color: var(--color-info); }
+    a:hover { color: var(--color-accent-dark); }
+
+    .tok-page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 64px 32px 96px;
+    }
+
+    .tok-header {
+      margin-bottom: 56px;
+    }
+
+    .tok-kicker {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-accent-dark);
+      font-weight: 600;
+      margin: 0 0 12px;
+    }
+
+    .tok-title {
+      font-family: var(--font-display);
+      font-size: 40px;
+      line-height: 1.15;
+      margin: 0 0 12px;
+    }
+
+    .tok-lede {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--color-muted);
+      max-width: 62ch;
+      margin: 0;
+    }
+
+    .tok-note {
+      margin-top: 28px;
+      padding: 16px 20px;
+      background: var(--color-info-bg);
+      border: 1px solid var(--color-info-border);
+      border-radius: var(--radius-sm);
+      color: var(--color-text);
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 74ch;
+    }
+
+    .tok-note strong { color: var(--color-info); }
+
+    .tok-section {
+      padding-top: 56px;
+      border-top: 1px solid var(--color-border);
+      margin-top: 56px;
+    }
+
+    .tok-section:first-of-type {
+      margin-top: 0;
+    }
+
+    .tok-section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tok-section-num {
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: var(--color-muted);
+    }
+
+    .tok-h2 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      margin: 0 0 8px;
+    }
+
+    .tok-desc {
+      font-size: 15px;
+      color: var(--color-muted);
+      line-height: 1.6;
+      max-width: 68ch;
+      margin: 0 0 32px;
+    }
+
+    .tok-sub {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin: 32px 0 16px;
+      font-weight: 600;
+    }
+
+    .tok-sub:first-of-type { margin-top: 0; }
+
+    /* ---- swatches ---- */
+    .swatch-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .swatch {
+      width: 140px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .swatch-color {
+      width: 100%;
+      height: 84px;
+      border-radius: var(--radius-sm);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+    }
+
+    .swatch-color--outline {
+      background: var(--color-surface);
+      box-shadow: none;
+      border: 4px solid var(--color-border);
+    }
+
+    .swatch-color--onaccent {
+      background: var(--color-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .swatch-token {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--color-text);
+    }
+
+    .swatch-hex {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--color-muted);
+    }
+
+    .swatch-usage {
+      font-size: 12px;
+      color: var(--color-muted);
+      line-height: 1.4;
+    }
+
+    /* ---- semantic chips ---- */
+    .semantic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .semantic-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      background: var(--color-surface);
+    }
+
+    .semantic-alert {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border-width: 2px;
+      border-style: solid;
+      margin-bottom: 16px;
+    }
+
+    .semantic-alert p {
+      margin: 0;
+      font-size: 13.5px;
+      color: var(--color-text);
+      flex: 1;
+    }
+
+    .semantic-swatch-row {
+      display: flex;
+      gap: 14px;
+    }
+
+    .semantic-swatch {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .semantic-swatch-color {
+      height: 36px;
+      border-radius: 4px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+    }
+
+    .semantic-swatch-label {
+      font-size: 10.5px;
+      color: var(--color-muted);
+    }
+
+    .semantic-swatch-hex {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 10.5px;
+      color: var(--color-text);
+    }
+
+    /* ---- typography ---- */
+    .type-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .type-row:last-child { border-bottom: none; }
+
+    .type-sample {
+      flex: 1;
+      min-width: 0;
+      color: var(--color-text);
+      overflow-wrap: break-word;
+    }
+
+    .type-meta {
+      width: 260px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .type-token {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--color-text);
+    }
+
+    .type-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--color-muted);
+      margin-top: 2px;
+    }
+
+    .type-usage {
+      font-size: 12px;
+      color: var(--color-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* ---- spacing ---- */
+    .space-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 10px 0;
+    }
+
+    .space-label {
+      width: 220px;
+      flex-shrink: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12.5px;
+      color: var(--color-text);
+    }
+
+    .space-alias {
+      color: var(--color-accent-dark);
+      font-size: 11px;
+      display: block;
+      margin-top: 2px;
+      font-family: var(--font-body);
+    }
+
+    .space-bar {
+      height: 22px;
+      background: rgba(107, 143, 113, 0.28);
+      border: 1px solid var(--color-accent);
+      border-radius: var(--radius-sm);
+    }
+
+    .space-px {
+      width: 56px;
+      flex-shrink: 0;
+      font-size: 12px;
+      color: var(--color-muted);
+      text-align: right;
+    }
+
+    /* ---- radii ---- */
+    .radius-grid {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .radius-card {
+      width: 220px;
+    }
+
+    .radius-shape {
+      width: 100%;
+      height: 120px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }
+
+    .radius-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .radius-desc {
+      font-size: 12px;
+      color: var(--color-muted);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* ---- applied components ---- */
+    .applied-grid {
+      display: grid;
+      gap: 28px;
+    }
+
+    .applied-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: var(--color-surface);
+      padding: 24px;
+    }
+
+    .applied-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin: 0 0 16px;
+      font-weight: 600;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: default;
+    }
+
+    .btn--primary { background: var(--color-accent); color: var(--color-on-accent); }
+    .btn--secondary { background: var(--color-surface); color: var(--color-text); border-color: var(--color-border); }
+    .btn--destructive { background: var(--color-error); color: #fff; }
+    .btn--icon {
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-surface);
+      color: var(--color-text);
+      border-color: var(--color-border);
+      border-radius: var(--radius-pill);
+    }
+
+    .mini-alert {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--color-info-border);
+      background: var(--color-info-bg);
+      color: var(--color-info);
+      max-width: 460px;
+    }
+
+    .mini-alert p { margin: 0; color: var(--color-text); font-size: 13.5px; flex: 1; }
+    .mini-alert button {
+      border: none;
+      background: none;
+      color: var(--color-muted);
+      display: flex;
+      cursor: default;
+      padding: 4px;
+    }
+
+    .check-row {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1.5px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .check-box--checked { background: var(--color-accent); border-color: var(--color-accent); }
+
+    .radio-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radio-dot--checked { border-color: var(--color-accent); }
+    .radio-dot--checked::after {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--color-accent);
+    }
+
+    .dialog-mock {
+      max-width: 380px;
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-elevated);
+      padding: 24px;
+    }
+
+    .dialog-mock h3 {
+      font-family: var(--font-display);
+      font-size: 19px;
+      margin: 0 0 10px;
+    }
+
+    .dialog-mock p {
+      font-size: 13.5px;
+      color: var(--color-muted);
+      line-height: 1.5;
+      margin: 0 0 20px;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .dialog-actions .btn { padding: 9px 16px; font-size: 13px; }
+
+    .menu-mock {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    .menu-trigger {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 10px 16px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-text);
+    }
+
+    .menu-list {
+      margin-top: 8px;
+      width: 180px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-elevated);
+      padding: 6px;
+      list-style: none;
+    }
+
+    .menu-list li {
+      padding: 9px 10px;
+      border-radius: 4px;
+      font-size: 13.5px;
+      color: var(--color-text);
+    }
+
+    .menu-list li.is-active { background: var(--color-bg); }
+
+    .toast-mock {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 320px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--color-success-bg);
+      border: 1px solid var(--color-success-border);
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .toast-mock p { margin: 0; font-size: 13.5px; color: var(--color-text); }
+    .toast-mock .icon { color: var(--color-success); flex-shrink: 0; }
+
+    .tok-footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-border);
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+
+    @media (max-width: 640px) {
+      .tok-page { padding: 40px 20px 64px; }
+      .tok-title { font-size: 30px; }
+      .semantic-grid { grid-template-columns: 1fr; }
+      .type-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .type-meta { width: 100%; text-align: left; }
+      .space-label { width: 150px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+<div class="tok-page">
+
+  <header class="tok-header">
+    <p class="tok-kicker">Sistema de diseño · Backoffice Ke-Fresh</p>
+    <h1 class="tok-title">Design tokens</h1>
+    <p class="tok-lede">
+      Paleta semántica, escala tipográfica, espaciado en grid de 4px y los dos radios de borde
+      que va a usar el resto de componentes del playground (alerts, botones, checkboxes/radios,
+      dialogs, menús y toasts). Todos los valores parten de <code>css/variables.css</code> y
+      <code>css/estilos.css</code>, que ya definen la identidad del sitio público.
+    </p>
+    <div class="tok-note">
+      <strong>Nota de consolidación —</strong> <code>variables.css</code> hoy define dos sistemas
+      de color para los estados (<code>--semantic-*</code>, saturado, sin fondo/borde propios) y
+      (<code>--color-success/error/warning/info</code>, cálido, con texto/fondo/borde). Esta guía
+      adopta el segundo como única paleta semántica porque combina con el resto de la marca y ya
+      trae los tres tonos que necesita un alert o un toast completo.
+    </div>
+  </header>
+
+  <!-- 1. PALETA SEMÁNTICA -->
+  <section class="tok-section">
+    <div class="tok-section-head">
+      <h2 class="tok-h2">Paleta semántica</h2>
+      <span class="tok-section-num">01</span>
+    </div>
+    <p class="tok-desc">
+      Neutros cálidos para superficie y texto, un acento de marca para acciones primarias, y
+      cuatro estados semánticos con su terna texto / fondo / borde.
+    </p>
+
+    <p class="tok-sub">Base y superficie</p>
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#faf8f5"></div>
+        <div class="swatch-token">--color-bg</div>
+        <div class="swatch-hex">#faf8f5</div>
+        <div class="swatch-usage">Fondo de página</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#ffffff"></div>
+        <div class="swatch-token">--color-surface</div>
+        <div class="swatch-hex">#ffffff</div>
+        <div class="swatch-usage">Tarjetas, diálogos, inputs, menús</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color swatch-color--outline"></div>
+        <div class="swatch-token">--color-border</div>
+        <div class="swatch-hex">#d8d2c8</div>
+        <div class="swatch-usage">Bordes y separadores</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2c2c2c"></div>
+        <div class="swatch-token">--color-text</div>
+        <div class="swatch-hex">#2c2c2c</div>
+        <div class="swatch-usage">Texto principal</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#5c5c5c"></div>
+        <div class="swatch-token">--color-muted</div>
+        <div class="swatch-hex">#5c5c5c</div>
+        <div class="swatch-usage">Texto secundario, ayudas</div>
+      </div>
+    </div>
+
+    <p class="tok-sub">Marca</p>
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#6b8f71"></div>
+        <div class="swatch-token">--color-accent</div>
+        <div class="swatch-hex">#6b8f71</div>
+        <div class="swatch-usage">Botón primario, foco de marca</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#4f6f55"></div>
+        <div class="swatch-token">--color-accent-dark</div>
+        <div class="swatch-hex">#4f6f55</div>
+        <div class="swatch-usage">Hover / active de primario</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color swatch-color--onaccent">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="swatch-token">--color-on-accent</div>
+        <div class="swatch-hex">#ffffff</div>
+        <div class="swatch-usage">Texto/ícono sobre fondos de acento</div>
+      </div>
+    </div>
+
+    <p class="tok-sub">Estados semánticos</p>
+    <div class="semantic-grid">
+      <div class="semantic-card">
+        <div class="semantic-alert" style="border-color:#bcd6c1; background:#eef4ef;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4f6f55" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <p>El producto se guardó correctamente.</p>
+        </div>
+        <div class="semantic-swatch-row">
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#4f6f55"></div>
+            <div class="semantic-swatch-label">--color-success</div>
+            <div class="semantic-swatch-hex">#4f6f55</div>
+          </div>
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#eef4ef"></div>
+            <div class="semantic-swatch-label">--color-success-bg</div>
+            <div class="semantic-swatch-hex">#eef4ef</div>
+          </div>
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#bcd6c1"></div>
+            <div class="semantic-swatch-label">--color-success-border</div>
+            <div class="semantic-swatch-hex">#bcd6c1</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="semantic-card">
+        <div class="semantic-alert" style="border-color:#eabdb6; background:#fbeae7;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L22 20 L2 20 Z"></path><line x1="12" y1="9" x2="12" y2="14"></line><circle cx="12" cy="17" r="0.6" fill="#c0392b" stroke="none"></circle></svg>
+          <p>No se pudo guardar el producto.</p>
+        </div>
+        <div class="semantic-swatch-row">
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#c0392b"></div>
+            <div class="semantic-swatch-label">--color-error</div>
+            <div class="semantic-swatch-hex">#c0392b</div>
+          </div>
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#fbeae7"></div>
+            <div class="semantic-swatch-label">--color-error-bg</div>
+            <div class="semantic-swatch-hex">#fbeae7</div>
+          </div>
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#eabdb6"></div>
+            <div class="semantic-swatch-label">--color-error-border</div>
+            <div class="semantic-swatch-hex">#eabdb6</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="semantic-card">
+        <div class="semantic-alert" style="border-color:#e9cd9a; background:#fbf1de;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a86a1d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L22 20 L2 20 Z"></path><line x1="12" y1="9" x2="12" y2="14"></line><circle cx="12" cy="17" r="0.6" fill="#a86a1d" stroke="none"></circle></svg>
+          <p>El stock de Dulce Amor está por debajo del mínimo.</p>
+        </div>
+        <div class="semantic-swatch-row">
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#a86a1d"></div>
+            <div class="semantic-swatch-label">--color-warning</div>
+            <div class="semantic-swatch-hex">#a86a1d</div>
+          </div>
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#fbf1de"></div>
+            <div class="semantic-swatch-label">--color-warning-bg</div>
+            <div class="semantic-swatch-hex">#fbf1de</div>
+          </div>
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#e9cd9a"></div>
+            <div class="semantic-swatch-label">--color-warning-border</div>
+            <div class="semantic-swatch-hex">#e9cd9a</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="semantic-card">
+        <div class="semantic-alert" style="border-color:#b9d4e6; background:#e8f1f7;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2f6690" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="11" x2="12" y2="16"></line><circle cx="12" cy="7.5" r="0.7" fill="#2f6690" stroke="none"></circle></svg>
+          <p>El catálogo se sincroniza cada 30 minutos.</p>
+        </div>
+        <div class="semantic-swatch-row">
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#2f6690"></div>
+            <div class="semantic-swatch-label">--color-info</div>
+            <div class="semantic-swatch-hex">#2f6690</div>
+          </div>
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#e8f1f7"></div>
+            <div class="semantic-swatch-label">--color-info-bg</div>
+            <div class="semantic-swatch-hex">#e8f1f7</div>
+          </div>
+          <div class="semantic-swatch">
+            <div class="semantic-swatch-color" style="background:#b9d4e6"></div>
+            <div class="semantic-swatch-label">--color-info-border</div>
+            <div class="semantic-swatch-hex">#b9d4e6</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="tok-sub">Foco y overlay</p>
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2f6690"></div>
+        <div class="swatch-token">--color-focus-ring</div>
+        <div class="swatch-hex">#2f6690</div>
+        <div class="swatch-usage">Anillo de :focus-visible en todos los controles</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(28,28,26,0.5)"></div>
+        <div class="swatch-token">--color-overlay</div>
+        <div class="swatch-hex">rgba(28,28,26,.5)</div>
+        <div class="swatch-usage">::backdrop de &lt;dialog&gt;</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. TIPOGRAFÍA -->
+  <section class="tok-section">
+    <div class="tok-section-head">
+      <h2 class="tok-h2">Escala tipográfica</h2>
+      <span class="tok-section-num">02</span>
+    </div>
+    <p class="tok-desc">
+      Segoe UI para toda la interfaz; Georgia solo para títulos, heredado del sitio público
+      para que el backoffice se sienta parte de la misma marca.
+    </p>
+
+    <div class="type-row">
+      <div class="type-sample" style="font-size:12px;">Actualizado hace 2 min</div>
+      <div class="type-meta">
+        <div class="type-token">--fs-2xs</div>
+        <div class="type-value">0.75rem / 12px</div>
+        <div class="type-usage">Metadatos de tabla, íconos pequeños</div>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-sample" style="font-size:14px;">Postres · Meriendas · Artesanales</div>
+      <div class="type-meta">
+        <div class="type-token">--fs-xs</div>
+        <div class="type-value">0.875rem / 14px</div>
+        <div class="type-usage">Etiquetas, badges, texto de ayuda</div>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-sample" style="font-size:15.2px;">Nombre del producto</div>
+      <div class="type-meta">
+        <div class="type-token">--fs-sm</div>
+        <div class="type-value">0.95rem / 15.2px</div>
+        <div class="type-usage">Labels de formulario, filas de tabla</div>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-sample" style="font-size:16px;">Se eliminará el producto y sus imágenes del catálogo.</div>
+      <div class="type-meta">
+        <div class="type-token">--fs-base</div>
+        <div class="type-value">1rem / 16px</div>
+        <div class="type-usage">Texto base, párrafos</div>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-sample" style="font-size:18px;">$4.50</div>
+      <div class="type-meta">
+        <div class="type-token">--fs-md</div>
+        <div class="type-value">1.125rem / 18px</div>
+        <div class="type-usage">Valores destacados, precio</div>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-sample" style="font-size:20px; font-weight:600;">Dulce Amor</div>
+      <div class="type-meta">
+        <div class="type-token">--fs-lg</div>
+        <div class="type-value">1.25rem / 20px</div>
+        <div class="type-usage">Título de tarjeta, botón de ícono</div>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-sample" style="font-size:24px; font-family:var(--font-display);">Cuenta</div>
+      <div class="type-meta">
+        <div class="type-token">--fs-xl</div>
+        <div class="type-value">1.5rem / 24px</div>
+        <div class="type-usage">Títulos de sección del backoffice</div>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-sample" style="font-size:32px; font-family:var(--font-display);">Productos</div>
+      <div class="type-meta">
+        <div class="type-token">--fs-display-sm</div>
+        <div class="type-value">clamp(1.5rem, 3vw, 2rem)</div>
+        <div class="type-usage">Título de página (heredado del sitio público)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ESPACIADO -->
+  <section class="tok-section">
+    <div class="tok-section-head">
+      <h2 class="tok-h2">Escala de espaciado — grid de 4px</h2>
+      <span class="tok-section-num">03</span>
+    </div>
+    <p class="tok-desc">
+      Cada paso es un múltiplo de 4px: <code>--space-N</code> equivale a <code>N × 4px</code>.
+      Los alias en rem que ya usa <code>variables.css</code> (<code>2xs/xs/sm/md/lg/xl</code>)
+      se mantienen para no romper el sitio público, y ahora caen sobre pasos concretos de esta
+      escala; los pasos intermedios quedan disponibles para el backoffice (padding de celdas,
+      gaps de formulario, etc.).
+    </p>
+
+    <div class="space-row">
+      <div class="space-label">--space-1<span class="space-alias">= --space-2xs</span></div>
+      <div class="space-bar" style="width:4px;"></div>
+      <div class="space-px">4px</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">--space-2<span class="space-alias">= --space-xs</span></div>
+      <div class="space-bar" style="width:8px;"></div>
+      <div class="space-px">8px</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">--space-3</div>
+      <div class="space-bar" style="width:12px;"></div>
+      <div class="space-px">12px</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">--space-4<span class="space-alias">= --space-sm</span></div>
+      <div class="space-bar" style="width:16px;"></div>
+      <div class="space-px">16px</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">--space-5</div>
+      <div class="space-bar" style="width:20px;"></div>
+      <div class="space-px">20px</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">--space-6<span class="space-alias">= --space-md</span></div>
+      <div class="space-bar" style="width:24px;"></div>
+      <div class="space-px">24px</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">--space-8</div>
+      <div class="space-bar" style="width:32px;"></div>
+      <div class="space-px">32px</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">--space-10<span class="space-alias">= --space-lg</span></div>
+      <div class="space-bar" style="width:40px;"></div>
+      <div class="space-px">40px</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">--space-12</div>
+      <div class="space-bar" style="width:48px;"></div>
+      <div class="space-px">48px</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">--space-16<span class="space-alias">= --space-xl</span></div>
+      <div class="space-bar" style="width:64px;"></div>
+      <div class="space-px">64px</div>
+    </div>
+  </section>
+
+  <!-- 4. RADIOS -->
+  <section class="tok-section">
+    <div class="tok-section-head">
+      <h2 class="tok-h2">Radios</h2>
+      <span class="tok-section-num">04</span>
+    </div>
+    <p class="tok-desc">
+      Dos radios cubren toda la interfaz: uno para controles, otro para contenedores.
+      <code>--radius-pill</code> sigue existiendo, pero como forma especial fuera de la
+      escala — solo para elementos circulares o tipo cápsula.
+    </p>
+
+    <div class="radius-grid">
+      <div class="radius-card">
+        <div class="radius-shape" style="border-radius:6px;"></div>
+        <div class="radius-name">--radius-sm — 6px</div>
+        <div class="radius-desc">Controles: botones, inputs, checkboxes/radios, alerts, ítems de menú.</div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-shape" style="border-radius:12px;"></div>
+        <div class="radius-name">--radius — 12px</div>
+        <div class="radius-desc">Contenedores: diálogos, tarjetas, paneles, el desplegable del menú.</div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-shape" style="border-radius:999px;"></div>
+        <div class="radius-name">--radius-pill — 999px</div>
+        <div class="radius-desc">Caso especial, no forma parte de la escala: botón de ícono circular, badges tipo cápsula.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. APLICADO A LOS COMPONENTES DEL PLAYGROUND -->
+  <section class="tok-section">
+    <div class="tok-section-head">
+      <h2 class="tok-h2">Aplicado a los componentes del playground</h2>
+      <span class="tok-section-num">05</span>
+    </div>
+    <p class="tok-desc">
+      Los mismos seis componentes de <code>playground.html</code>, ya con la paleta, tipografía,
+      espaciado y radios resueltos — la referencia para terminar <code>botones.css</code>,
+      <code>alerts.css</code>, <code>checkboxes-radios.css</code>, <code>dialogs.css</code>,
+      <code>menus.css</code> y <code>toasts.css</code>.
+    </p>
+
+    <div class="applied-grid">
+      <div class="applied-card">
+        <p class="applied-label">Botones</p>
+        <div class="btn-row">
+          <button class="btn btn--primary">Guardar</button>
+          <button class="btn btn--secondary">Cancelar</button>
+          <button class="btn btn--destructive">Eliminar</button>
+          <button class="btn btn--icon" aria-label="Más opciones">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#2c2c2c"><circle cx="12" cy="5" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="12" cy="19" r="1.8"></circle></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="applied-card">
+        <p class="applied-label">Alert</p>
+        <div class="mini-alert">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2f6690" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="11" x2="12" y2="16"></line><circle cx="12" cy="7.5" r="0.7" fill="#2f6690" stroke="none"></circle></svg>
+          <p>El catálogo se sincroniza automáticamente cada 30 minutos.</p>
+          <button aria-label="Cerrar aviso">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="applied-card">
+        <p class="applied-label">Checkboxes / Radios</p>
+        <div class="check-row">
+          <label class="check-item">
+            <span class="check-box check-box--checked">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            Meriendas
+          </label>
+          <label class="check-item">
+            <span class="check-box"></span>
+            Postres
+          </label>
+          <label class="check-item">
+            <span class="radio-dot radio-dot--checked"></span>
+            Borrador
+          </label>
+          <label class="check-item">
+            <span class="radio-dot"></span>
+            Publicado
+          </label>
+        </div>
+      </div>
+
+      <div class="applied-card">
+        <p class="applied-label">Dialog</p>
+        <div class="dialog-mock">
+          <h3>¿Eliminar «Dulce Amor»?</h3>
+          <p>Se eliminará el producto y sus imágenes del catálogo. Esta acción no se puede deshacer.</p>
+          <div class="dialog-actions">
+            <button class="btn btn--secondary">Cancelar</button>
+            <button class="btn btn--destructive">Eliminar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="applied-card">
+        <p class="applied-label">Menú</p>
+        <div class="menu-mock">
+          <div class="menu-trigger">
+            Cuenta
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#2c2c2c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <ul class="menu-list">
+            <li class="is-active">Perfil</li>
+            <li>Configuración</li>
+            <li>Cerrar sesión</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="applied-card">
+        <p class="applied-label">Toast</p>
+        <div class="toast-mock">
+          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <p>Cambios guardados en el catálogo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="tok-footer">
+    Kefi-Fresh · Backoffice · valores tomados de css/variables.css y css/estilos.css (tema claro)
+  </footer>
+
+</div>
+</body>
+</html>

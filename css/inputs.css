@@ -1,0 +1,79 @@
+/* Inputs — texto, select, textarea, con ayuda, error y disabled */
+
+.c-field {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 22rem;
+}
+
+.c-field label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.c-field input,
+.c-field select,
+.c-field textarea {
+  width: 100%;
+  padding: var(--control-padding-y);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--fs-sm);
+}
+
+.c-field textarea {
+  resize: vertical;
+}
+
+.c-field input:focus-visible,
+.c-field select:focus-visible,
+.c-field textarea:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.c-field input:disabled,
+.c-field select:disabled,
+.c-field textarea:disabled {
+  background: var(--color-bg);
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+.c-field input[aria-invalid="true"],
+.c-field select[aria-invalid="true"],
+.c-field textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.c-field-hint {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+}
+
+.c-field-error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: var(--fs-xs);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .c-field {
+    max-width: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .c-field input,
+  .c-field select,
+  .c-field textarea {
+    font-size: var(--fs-xs);
+  }
+}

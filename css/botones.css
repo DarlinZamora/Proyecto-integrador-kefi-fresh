@@ -4,15 +4,27 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+<<<<<<< Updated upstream
   gap: 0.5rem;
   border: var(--border) solid transparent;
   border-radius: var(--radius-sm);
   padding: var(--control-padding-y) var(--control-padding-x);
   font: inherit;
+=======
+  gap: var(--space-2);
+  padding: var(--control-padding-y) var(--control-padding-x);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--fs-sm);
+>>>>>>> Stashed changes
   font-weight: 600;
   line-height: 1;
   cursor: pointer;
   transition: background-color var(--transition-fast), border-color var(--transition-fast),
+<<<<<<< Updated upstream
     color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
@@ -26,10 +38,21 @@
 /* Focus: .is-focus simula el anillo de :focus-visible para el playground */
 .c-btn:focus-visible,
 .c-btn.is-focus {
+=======
+    color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.c-btn:hover {
+  box-shadow: var(--shadow);
+}
+
+.c-btn:focus-visible {
+>>>>>>> Stashed changes
   outline: var(--focus-ring-width) solid var(--color-focus-ring);
   outline-offset: var(--focus-ring-offset);
 }
 
+<<<<<<< Updated upstream
 /* Pressed/Active: .is-active simula el estado presionado */
 .c-btn:active,
 .c-btn.is-active {
@@ -89,12 +112,48 @@
 .c-btn--destructive.is-active {
   background-color: var(--color-danger-dark);
   border-color: var(--color-danger-dark);
+=======
+.c-btn:disabled {
+  opacity: 0.55;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.c-btn--primary {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.c-btn--primary:hover {
+  background: var(--color-accent-dark);
+}
+
+.c-btn--secondary {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.c-btn--secondary:hover {
+  background: var(--color-bg);
+  border-color: var(--color-muted);
+}
+
+.c-btn--destructive {
+  background: var(--color-error);
+  color: #fff;
+}
+
+.c-btn--destructive:hover {
+  background: var(--color-danger-dark);
+>>>>>>> Stashed changes
 }
 
 .c-btn--icon {
   width: var(--size-icon-btn);
   height: var(--size-icon-btn);
   padding: 0;
+<<<<<<< Updated upstream
   border-radius: var(--radius-pill);
   background-color: transparent;
   border-color: var(--color-border);
@@ -111,17 +170,38 @@
 .c-btn--icon.is-active {
   background-color: var(--color-bg);
   border-color: var(--color-accent);
+=======
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-lg);
+}
+
+.c-btn--icon:hover {
+  background: var(--color-bg);
+  border-color: var(--color-muted);
+>>>>>>> Stashed changes
 }
 
 /* Tablet */
 @media (max-width: 768px) {
   .c-btn {
+<<<<<<< Updated upstream
     padding: calc(var(--control-padding-y) * 0.9) calc(var(--control-padding-x) * 0.85);
   }
 
   .c-btn--icon {
     width: calc(var(--size-icon-btn) * 0.9);
     height: calc(var(--size-icon-btn) * 0.9);
+=======
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .c-btn--icon {
+    width: 2.5rem;
+    height: 2.5rem;
+>>>>>>> Stashed changes
   }
 }
 
@@ -132,6 +212,11 @@
   }
 
   .c-btn--icon {
+<<<<<<< Updated upstream
     width: var(--size-icon-btn);
+=======
+    width: 2.5rem;
+    height: 2.5rem;
+>>>>>>> Stashed changes
   }
 }

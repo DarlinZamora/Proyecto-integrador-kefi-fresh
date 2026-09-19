@@ -1,41 +1,87 @@
 /* Menús — dropdown de cuenta, con trigger de texto o icon button */
 
-.c-menu-account-toggle {
+[data-menu] {
+  position: relative;
+  display: inline-block;
+}
+
+.c-menu-account-toggle span[aria-hidden] {
+  display: inline-block;
+  transition: transform var(--transition-fast);
 }
 
 .c-menu-account-toggle[aria-expanded="true"] {
+  background: var(--color-bg);
+  border-color: var(--color-muted);
+}
+
+.c-menu-account-toggle[aria-expanded="true"] span[aria-hidden] {
+  transform: rotate(180deg);
 }
 
 .c-menu-account {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  left: 0;
+  z-index: var(--z-menu);
+  min-width: 11rem;
+  margin: 0;
+  padding: var(--space-2);
+  list-style: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-elevated);
 }
 
 .c-menu-account li {
+  margin: 0;
 }
 
 .c-menu-account a,
 .c-menu-account button {
+  display: block;
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .c-menu-account a:hover,
 .c-menu-account button:hover {
+  background: var(--color-bg);
 }
 
 .c-menu-account a:focus-visible,
 .c-menu-account button:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: -2px;
 }
 
 /* Tablet */
 @media (max-width: 768px) {
   .c-menu-account {
+    min-width: 10rem;
   }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
   .c-menu-account {
+    left: auto;
+    right: 0;
+    min-width: 9rem;
   }
 
   .c-menu-account a,
   .c-menu-account button {
+    padding: var(--space-3);
   }
 }

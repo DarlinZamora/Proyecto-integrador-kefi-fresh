@@ -15,6 +15,8 @@
   --color-accent-dark: #4f6f55;
   --color-border: #d8d2c8;
   --color-on-accent: #ffffff;
+/* --semantic-* queda deprecado: usa --color-success/error/warning/info
+   de abajo (texto/fondo/borde a juego con la marca) en su lugar. */
 --semantic-success: #10b981;
 --semantic-error: #fc5a5a;
 --semantic-warning: #f59e0b;
@@ -54,7 +56,22 @@
   --fs-lg: 1.25rem;
   --fs-xl: 1.5rem;
 
-  /* Espaciado */
+  /* Espaciado — escala base de 4px: --space-N = N x 4px.
+     Los alias en rem de abajo (2xs/xs/sm/md/lg/xl) se mantienen porque
+     el sitio público ya depende de ellos; ahora caen sobre pasos
+     concretos de esta escala. Usa los pasos numerados para el resto
+     de espaciados del backoffice (padding de celdas, gaps de forms). */
+  --space-1: 0.25rem;  /* 4px  = --space-2xs */
+  --space-2: 0.5rem;   /* 8px  = --space-xs */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px = --space-sm */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px = --space-md */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px = --space-lg */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px = --space-xl */
+
   --space-2xs: 0.25rem;
   --space-xs: 0.5rem;
   --space-sm: 1rem;
