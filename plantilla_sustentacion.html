@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Evidencia de sustentación — Kefi-Fresh</title>
+<style>
+  :root{
+    --bg-page:#F7F6F2; --surface-1:#EFEDE6; --surface-2:#FFFFFF;
+    --text-primary:#2C2C2A; --text-secondary:#5F5E5A; --text-muted:#888780;
+    --border:#D3D1C7; --border-strong:#B4B2A9;
+    --radius:8px; --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;
+    color-scheme: light;
+
+    /* Un color fijo por principio de UX — no cambian de significado */
+    --affordance-fill:#E6F1FB; --affordance-border:#378ADD; --affordance-text:#0C447C;
+    --consistencia-fill:#E1F5EE; --consistencia-border:#1D9E75; --consistencia-text:#085041;
+    --feedback-fill:#FAEEDA; --feedback-border:#BA7517; --feedback-text:#633806;
+    --jerarquia-fill:#F3E8FA; --jerarquia-border:#8E4FC4; --jerarquia-text:#4B2568;
+
+    /* Un color fijo por herramienta de analítica — no cambian de significado */
+    --analytics-fill:#FDECEA; --analytics-border:#D8503A; --analytics-text:#7A2A1A;
+    --mixpanel-fill:#FFF4E0; --mixpanel-border:#C98A17; --mixpanel-text:#63430A;
+    --hotjar-fill:#FDEBF1; --hotjar-border:#D43C82; --hotjar-text:#7A1E45;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      color-scheme: dark;
+      --bg-page:#1C1C1A; --surface-1:#2C2C2A; --surface-2:#232320;
+      --text-primary:#EDEBE4; --text-secondary:#B4B2A9; --text-muted:#888780;
+      --border:#444441; --border-strong:#5F5E5A;
+
+      --affordance-fill:#0C447C; --affordance-border:#85B7EB; --affordance-text:#B5D4F4;
+      --consistencia-fill:#085041; --consistencia-border:#5DCAA5; --consistencia-text:#9FE1CB;
+      --feedback-fill:#633806; --feedback-border:#EF9F27; --feedback-text:#FAC775;
+      --jerarquia-fill:#3A1E52; --jerarquia-border:#C08FEF; --jerarquia-text:#E4CCFA;
+
+      --analytics-fill:#7A2A1A; --analytics-border:#F0997B; --analytics-text:#F5C4B3;
+      --mixpanel-fill:#63430A; --mixpanel-border:#EFB84A; --mixpanel-text:#FADFA0;
+      --hotjar-fill:#7A1E45; --hotjar-border:#F088B4; --hotjar-text:#FAC7DD;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; padding:32px 16px; background:var(--bg-page); color:var(--text-primary); font-family:var(--font-sans); line-height:1.55;}
+  .wrap{max-width:720px; margin:0 auto;}
+  h1{font-size:20px; font-weight:500; margin:0 0 4px;}
+  p.subtitle{font-size:13.5px; color:var(--text-secondary); margin:0 0 8px;}
+  p.netlify-link{font-size:13px; margin:0 0 28px;}
+  p.netlify-link a{color:var(--text-primary);}
+
+  h2.seccion-titulo{font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--text-muted); margin:32px 0 12px; padding-bottom:6px; border-bottom:0.5px solid var(--border);}
+  h2.seccion-titulo:first-of-type{margin-top:0;}
+
+  /* Tarjetas de principios de UX */
+  .principio-card{
+    background:var(--surface-2); border:0.5px solid var(--border-strong); border-radius:12px;
+    padding:16px 18px; margin-bottom:14px;
+  }
+  .principio-header{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .principio-badge{font-family:var(--font-mono); font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.03em; padding:3px 10px; border-radius:999px; border:0.5px solid;}
+  .principio-titulo{font-size:15px; font-weight:500; margin:0;}
+
+  .badge-affordance{background:var(--affordance-fill); border-color:var(--affordance-border); color:var(--affordance-text);}
+  .badge-consistencia{background:var(--consistencia-fill); border-color:var(--consistencia-border); color:var(--consistencia-text);}
+  .badge-feedback{background:var(--feedback-fill); border-color:var(--feedback-border); color:var(--feedback-text);}
+  .badge-jerarquia{background:var(--jerarquia-fill); border-color:var(--jerarquia-border); color:var(--jerarquia-text);}
+
+  .principio-bullets{margin:0; padding-left:18px; font-size:13.5px; color:var(--text-secondary);}
+  .principio-bullets li{margin-bottom:5px;}
+  .principio-bullets code{font-family:var(--font-mono); font-size:12px; background:var(--surface-1); padding:1px 5px; border-radius:4px; color:var(--text-primary);}
+
+  /* Tarjetas de evidencia de analítica (captura + explicación) */
+  .analitica-card{
+    background:var(--surface-2); border:0.5px solid var(--border-strong); border-radius:12px;
+    padding:16px 18px; margin-bottom:14px;
+  }
+  .analitica-header{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+  .badge-analytics{background:var(--analytics-fill); border-color:var(--analytics-border); color:var(--analytics-text);}
+  .badge-mixpanel{background:var(--mixpanel-fill); border-color:var(--mixpanel-border); color:var(--mixpanel-text);}
+  .badge-hotjar{background:var(--hotjar-fill); border-color:var(--hotjar-border); color:var(--hotjar-text);}
+
+  .captura-placeholder{
+    width:100%; aspect-ratio:16/9; border-radius:8px; border:1px dashed var(--border-strong);
+    background:var(--surface-1); display:flex; align-items:center; justify-content:center;
+    font-size:12.5px; color:var(--text-muted); font-family:var(--font-mono); text-align:center; padding:12px;
+    object-fit:cover;
+  }
+  .analitica-explicacion{font-size:13.5px; color:var(--text-secondary); margin:10px 0 0;}
+  .analitica-explicacion strong{color:var(--text-primary); font-weight:500;}
+
+  footer.note{margin-top:24px; font-size:12px; color:var(--text-muted); text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Evidencia de sustentación</h1>
+  <p class="subtitle">Darlin Zamora · Kefi-Fresh</p>
+  <p class="netlify-link">Proyecto publicado: <a href="https://kefi-fresh.netlify.app">https://kefi-fresh.netlify.app</a></p>
+
+  <h2 class="seccion-titulo">Fundamentos de UX aplicados</h2>
+
+  <div class="principio-card">
+    <div class="principio-header">
+      <span class="principio-badge badge-affordance">Affordance</span>
+      <p class="principio-titulo">¿Qué elementos comunican cómo se usan?</p>
+    </div>
+    <ul class="principio-bullets">
+      <li>El buscador de productos <code>#product-search</code> usa <code>type="search"</code> con el placeholder "Buscar por categoría (ej. Postre, Artesanal...)", dejando claro qué se puede escribir ahí.</li>
+      <li>El botón del carrito <code>data-cart-toggle</code> muestra una insignia <code>.cart-toggle__badge</code> que solo aparece cuando hay productos agregados, comunicando que es interactivo y tiene estado.</li>
+    </ul>
+  </div>
+
+  <div class="principio-card">
+    <div class="principio-header">
+      <span class="principio-badge badge-consistencia">Consistencia</span>
+      <p class="principio-titulo">¿Qué patrones se repiten en todo el producto?</p>
+    </div>
+    <ul class="principio-bullets">
+      <li>Los mismos estilos de botón primario/secundario (color, radio, tipografía) se repiten en <code>index.html</code>, <code>productos.html</code>, <code>nosotros.html</code> y <code>blog.html</code>.</li>
+      <li>El encabezado con el logo y el ícono del carrito se mantiene fijo en la misma posición en las 5 páginas del sitio.</li>
+    </ul>
+  </div>
+
+  <div class="principio-card">
+    <div class="principio-header">
+      <span class="principio-badge badge-feedback">Feedback</span>
+      <p class="principio-titulo">¿Cómo sabe el usuario que su acción tuvo efecto?</p>
+    </div>
+    <ul class="principio-bullets">
+      <li>El formulario de contacto tiene una región <code>data-form-feedback</code> con <code>role="status"</code> y <code>aria-live="polite"</code> que anuncia el resultado del envío sin recargar la página.</li>
+      <li>Al agregar un producto, el contador <code>data-cart-count</code> se actualiza al instante y se abre el drawer del carrito (<code>.is-open</code>) mostrando el nuevo total.</li>
+    </ul>
+  </div>
+
+  <div class="principio-card">
+    <div class="principio-header">
+      <span class="principio-badge badge-jerarquia">Jerarquía</span>
+      <p class="principio-titulo">¿Cómo guía la interfaz la atención del usuario?</p>
+    </div>
+    <ul class="principio-bullets">
+      <li>En el carrusel de productos destacados, la diapositiva y el punto activos usan la clase <code>.is-active</code> para resaltarse sobre el resto.</li>
+      <li>En el checkout del carrito, "Finalizar por WhatsApp" es el único botón de color sólido; "Vaciar carrito" queda como acción secundaria de menor peso visual.</li>
+    </ul>
+  </div>
+
+  <h2 class="seccion-titulo">Evidencia de analítica</h2>
+
+  <div class="analitica-card">
+    <div class="analitica-header">
+      <span class="principio-badge badge-analytics">Google Analytics</span>
+    </div>
+    <img class="captura-placeholder" src="docs/evidencia-sustentacion/captura-analytics.png" alt="Captura de Google Analytics mostrando dispositivos y visitas">
+    <p class="analitica-explicacion"><strong>Qué muestra:</strong> El resumen de tecnología de la propiedad GA4 (<code>G-Q4PNCY6KV4</code>), instalada en las 5 páginas del sitio. Se ve que el 87% de los usuarios activos entra desde mobile y el 13% desde desktop, casi todos con Chrome, lo cual confirma que el diseño responsive de Kefi-Fresh es la prioridad real de los primeros visitantes tras publicar en Netlify.</p>
+  </div>
+
+  <div class="analitica-card">
+    <div class="analitica-header">
+      <span class="principio-badge badge-mixpanel">Mixpanel</span>
+    </div>
+    <img class="captura-placeholder" src="docs/evidencia-sustentacion/captura-mixpanel.png" alt="Captura de Mixpanel mostrando journeys y grabaciones de sesión por dispositivo">
+    <p class="analitica-explicacion"><strong>Qué decidí medir:</strong> Grabé las sesiones y trayectorias (Journeys) de los primeros visitantes para ver el recorrido real que siguen dentro del sitio. En el código (<code>js/mixpanel-events.js</code>) instrumenté además eventos personalizados vía <code>data-mixpanel-event</code> como <code>producto_agregado_carrito</code>, <code>carrito_checkout_whatsapp</code>, <code>carousel_next_clicked</code>, <code>instagram_clicked</code> y <code>whatsapp_clicked</code>, porque quería saber qué tan lejos llega un usuario en el flujo de compra por WhatsApp, algo que Google Analytics no capta por defecto.</p>
+  </div>
+
+  <div class="analitica-card">
+    <div class="analitica-header">
+      <span class="principio-badge badge-hotjar">Hotjar</span>
+    </div>
+    <img class="captura-placeholder" src="docs/evidencia-sustentacion/captura-hotjar.png" alt="Captura del panel de Core Web Vitals (RUM) de Hotjar/Contentsquare">
+    <p class="analitica-explicacion"><strong>Qué muestra:</strong> El panel de Core Web Vitals (RUM) de Hotjar/Contentsquare, con el Time To First Byte promedio en desktop (201ms) y mobile (197ms), ambos dentro del rango "Good" (menos de 800ms). Lo agregué para verificar que la velocidad real del sitio publicado en Netlify sea aceptable, como complemento a los mapas de calor y grabaciones de sesión que también corren en cada página.</p>
+  </div>
+
+  <footer class="note">Entregado como parte de la sustentación M2 — reemplazar ejemplos y capturas por evidencia real del proyecto propio.</footer>
+</div>
+</body>
+</html>
