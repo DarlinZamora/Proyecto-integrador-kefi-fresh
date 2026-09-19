@@ -4,7 +4,7 @@ const path = require("path");
 const root = path.resolve(__dirname, "..");
 const dist = path.join(root, "dist");
 
-const filesToCopy = ["index.html", "nosotros.html", "productos.html", "playground.html", "robots.txt", "sitemap.xml"];
+const filesToCopy = ["index.html", "nosotros.html", "productos.html", "blog.html", "playground.html", "robots.txt", "sitemap.xml"];
 const dirsToCopy = ["css", "js", "img"];
 
 fs.rmSync(dist, { recursive: true, force: true });
