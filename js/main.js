@@ -1,7 +1,10 @@
 /**
- * Kefi-Fresh — Carrusel accesible con soporte de teclado
+ * Kefi-Fresh — Carrusel accesible con soporte de teclado, con auto-avance
+ * infinito y lento que se pausa mientras el usuario interactúa con él.
  */
 (function initCarousel() {
+  const AUTOPLAY_DELAY_MS = 5000;
+
   const carousel = document.querySelector("[data-carousel]");
   if (!carousel) return;
 
@@ -12,6 +15,7 @@
   const dots = Array.from(carousel.querySelectorAll("[data-carousel-dot]"));
 
   let currentIndex = 0;
+  let autoplayId = null;
 
   function goToSlide(index) {
     const total = slides.length;
@@ -32,12 +36,34 @@
     });
   }
 
-  prevButton.addEventListener("click", () => goToSlide(currentIndex - 1));
-  nextButton.addEventListener("click", () => goToSlide(currentIndex + 1));
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayId = window.setInterval(() => {
+      goToSlide(currentIndex + 1);
+    }, AUTOPLAY_DELAY_MS);
+  }
+
+  function stopAutoplay() {
+    if (autoplayId !== null) {
+      window.clearInterval(autoplayId);
+      autoplayId = null;
+    }
+  }
+
+  prevButton.addEventListener("click", () => {
+    goToSlide(currentIndex - 1);
+    startAutoplay();
+  });
+
+  nextButton.addEventListener("click", () => {
+    goToSlide(currentIndex + 1);
+    startAutoplay();
+  });
 
   dots.forEach((dot) => {
     dot.addEventListener("click", () => {
       goToSlide(Number(dot.dataset.carouselDot));
+      startAutoplay();
     });
   });
 
@@ -45,14 +71,24 @@
     if (event.key === "ArrowLeft") {
       event.preventDefault();
       goToSlide(currentIndex - 1);
+      startAutoplay();
     }
 
     if (event.key === "ArrowRight") {
       event.preventDefault();
       goToSlide(currentIndex + 1);
+      startAutoplay();
     }
   });
 
+  // Se pausa mientras el usuario interactúa con el carrusel (hover o teclado),
+  // para no interrumpirlo ni competir con la navegación manual.
+  carousel.addEventListener("mouseenter", stopAutoplay);
+  carousel.addEventListener("mouseleave", startAutoplay);
+  carousel.addEventListener("focusin", stopAutoplay);
+  carousel.addEventListener("focusout", startAutoplay);
+
   carousel.setAttribute("tabindex", "0");
   goToSlide(0);
+  startAutoplay();
 })();
