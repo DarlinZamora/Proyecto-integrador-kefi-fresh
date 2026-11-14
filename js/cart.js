@@ -19,7 +19,7 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
         }
         catch {
-            /* localStorage no disponible (modo privado, etc.) */
+            /* localStorage no disponible */
         }
     }
     let cart = readCart();
@@ -61,8 +61,13 @@
         return cart.reduce((sum, item) => sum + item.qty * item.price, 0);
     }
     function buildWhatsAppLink() {
-        if (cart.length === 0)
+        if (cart.length === 0) {
             return "#";
+        }
+        const nombreCliente = document.getElementById('nombreCliente')?.value.trim() || '';
+        const telefono = document.getElementById('telefono')?.value.trim() || '';
+        const direccionEntrega = document.getElementById('direccionEntrega')?.value.trim() || '';
+        const observaciones = document.getElementById('observaciones')?.value.trim() || '';
         const lines = cart.map((item) => `- ${item.qty}x ${item.name} (${formatPrice(item.price)} c/u)`);
         const message = [
             "Hola, quiero hacer este pedido en Kefi-Fresh:",
@@ -70,10 +75,18 @@
             ...lines,
             "",
             `Total: ${formatPrice(totalPrice())}`,
+            "",
+            "*Datos de Despacho:*",
+            `- Nombre: ${nombreCliente}`,
+            `- Teléfono: ${telefono}`,
+            `- Dirección: ${direccionEntrega}`,
+            `- Observaciones: ${observaciones}`
         ].join("\n");
         return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     }
     function render() {
+        if (!list || !emptyMessage || !totalEl || !countEl)
+            return;
         list.innerHTML = "";
         for (const item of cart) {
             const li = document.createElement("li");
@@ -161,6 +174,8 @@
         if (!itemEl)
             return;
         const id = itemEl.dataset.cartItem;
+        if (!id)
+            return;
         if (target.closest("[data-cart-increase]")) {
             changeQty(id, 1);
         }
@@ -171,16 +186,66 @@
             removeItem(id);
         }
     });
+    // Evitar que escriban letras o símbolos en tiempo real en el teléfono
+    const telefonoInput = document.getElementById('telefono');
+    const telefonoError = document.getElementById('telefonoError'); // Referencia al texto de error
+    telefonoInput?.addEventListener("input", () => {
+        // Remover todo lo que no sea número automáticamente
+        telefonoInput.value = telefonoInput.value.replace(/\D/g, '');
+        // Validar en tiempo real si tiene menos de 10 dígitos
+        if (telefonoInput.value.length < 10 && telefonoInput.value.length > 0) {
+            telefonoInput.style.borderColor = "red";
+            if (telefonoError) {
+                telefonoError.style.display = "block";
+                telefonoError.textContent = `Dígitos incompletos (${telefonoInput.value.length}/10)`;
+            }
+        }
+        else {
+            telefonoInput.style.borderColor = "";
+            if (telefonoError) {
+                telefonoError.style.display = "none";
+            }
+        }
+    });
     checkoutLink?.addEventListener("click", (event) => {
         if (cart.length === 0) {
             event.preventDefault();
             return;
         }
+        const nombreCliente = document.getElementById('nombreCliente')?.value.trim() || '';
+        const telefono = telefonoInput?.value.trim() || '';
+        const direccionEntrega = document.getElementById('direccionEntrega')?.value.trim() || '';
+        if (!nombreCliente || !telefono || !direccionEntrega) {
+            event.preventDefault();
+            if (!telefono && telefonoInput)
+                telefonoInput.style.borderColor = 'red';
+            alert('Por favor, completa tu Nombre, Teléfono y Dirección de entrega.');
+            return;
+        }
+        if (telefono.length !== 10) {
+            event.preventDefault();
+            telefonoInput.style.borderColor = 'red';
+            if (telefonoError) {
+                telefonoError.style.display = "block";
+                telefonoError.textContent = 'El número debe tener exactamente 10 dígitos.';
+            }
+            return;
+        }
+        const link = buildWhatsAppLink();
+        if (link === "#") {
+            event.preventDefault();
+            return;
+        }
+        checkoutLink.href = link;
         trackMixpanelEvent("carrito_checkout_whatsapp", { total: totalPrice(), items: totalItems() });
     });
     document.querySelectorAll("[data-add-to-cart]").forEach((button) => {
         button.addEventListener("click", () => {
-            const { productId, productName, productPrice, productImage } = button.dataset;
+            const dataset = button.dataset;
+            const productId = dataset.productId;
+            const productName = dataset.productName;
+            const productPrice = dataset.productPrice;
+            const productImage = dataset.productImage;
             if (!productId || !productName || !productPrice)
                 return;
             addItem(productId, productName, Number(productPrice), productImage ?? "");

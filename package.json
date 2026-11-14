@@ -1,17 +1,31 @@
 {
-  "name": "kefi-fresh",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "proyecto-bootcamp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "tsc && node scripts/build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "tsc && node scripts/build.cjs",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "health": "pnpm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "dependencies": {
+    "firebase": "^13.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
   "devDependencies": {
-    "typescript": "^7.0.2"
+    "@types/node": "24.13.3",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "oxlint": "1.79.0",
+    "typescript": "5.0.3",
+    "vite": "6.2.2"
+  },
+  "packageManager": "pnpm@11.17.0",
+  "engines": {
+    "node": ">=22.22.0"
   }
 }

@@ -132,15 +132,42 @@
       aria-label="Carrito de compras"
       aria-hidden="true"
     >
-      <div class="cart-drawer__header">
-        <h2>Tu carrito</h2>
-        <button type="button" class="btn btn--icon" data-cart-close aria-label="Cerrar carrito">
-          &times;
-        </button>
-      </div>
 
-      <p class="cart-drawer__empty" data-cart-empty>Tu carrito está vacío.</p>
-      <ul class="cart-drawer__list" data-cart-list hidden></ul>
+
+      <div class="cart-drawer-header">
+    <h2>Tu carrito</h2>
+    <button type="button" class="btn btn--icon" data-cart-close aria-label="Cerrar carrito">&times;</button>
+</div>
+
+<!-- 1. La lista de productos (ARRIBA) -->
+<ul data-cart-list class="cart-list"></ul>
+<p class="cart-drawer__empty" data-cart-empty>Tu carrito está vacío.</p>
+
+<!-- 2. Formulario de Datos de Despacho (ABAJO) -->
+<form id="form-despacho" class="datos-despacho">
+    <h4>Datos de entrega</h4>
+
+    <div class="campo-grupo">
+        <label for="nombreCliente">Nombre completo *</label>
+        <input type="text" id="nombreCliente" name="nombreCliente" required placeholder="Ej: Ana García">
+    </div>
+
+    <div class="campo-grupo">
+        <label for="telefono">Teléfono *</label>
+        <input type="text" id="telefono" name="telefono" placeholder="Ej: 0991234567">
+        <span id="telefonotrror" style="color: red; font-size: 12px; display: none;">Faltan dígitos (deben ser 10)</span>
+    </div>
+
+    <div class="campo-grupo">
+        <label for="direccionEntrega">Dirección de entrega *</label>
+        <input type="text" id="direccionEntrega" name="direccionEntrega" required placeholder="Sector, calle principal y referencia">
+    </div>
+
+    <div class="campo-grupo">
+        <label for="observaciones">Observaciones</label>
+        <textarea id="observaciones" name="observaciones" placeholder="Ej: Casa color blanco..."></textarea>
+    </div>
+</form>
 
       <div class="cart-drawer__footer">
         <p class="cart-drawer__total">
@@ -255,6 +282,8 @@
             <button type="button" class="tag product-filter__chip" data-filter-chip="Medio en azúcar">Medio en azúcar</button>
             <button type="button" class="tag product-filter__chip" data-filter-chip="Artesanal">Artesanal</button>
             <button type="button" class="tag product-filter__chip" data-filter-chip="Frutos Rojos">Frutos Rojos</button>
+            <button type="button" class="tag product-filter__chip" data-filter-chip="Frutas Verdes">Frutas Verdes</button>
+            <button type="button" class="tag product-filter__chip" data-filter-chip="Piña y Coco">Piña y Coco</button>
           </div>
         </div>
 
@@ -389,7 +418,7 @@
               <img
                 class="product-detail__photo"
                 src="img/producto-frutas-verdes.jpg"
-                alt="Postre de frutas verdes, kiwi y uva"
+                alt="Postre de frutas verdes: Kiwi y uvas verdes picadas con mermelada de pera"
                 width="842"
                 height="1264"
                 loading="lazy"

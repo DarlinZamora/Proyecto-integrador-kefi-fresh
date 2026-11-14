@@ -3,10 +3,15 @@
  * Maneja cualquier disparador [data-dialog-open="<id>"] hacia su <dialog id="<id>">,
  * más el comportamiento propio del modal de inicio de sesión.
  */
+
+import { auth, googleProvider } from "./firebase";
+import { signInWithPopup } from "firebase/auth";
+
 (function initDialogs(): void {
   type DialogEntry = { dialog: HTMLDialogElement; lastTrigger: HTMLElement | null };
   const dialogs = new Map<string, DialogEntry>();
 
+  // 1. Abre cualquier modal del sitio usando data-dialog-open
   document.querySelectorAll<HTMLButtonElement>("[data-dialog-open]").forEach((openButton) => {
     const dialogId = openButton.getAttribute("data-dialog-open");
     if (!dialogId) return;
@@ -23,7 +28,6 @@
         closeButton.addEventListener("click", () => dialog.close("cancel"));
       });
 
-      // "close" cubre tanto Escape (nativo de <dialog>) como el botón de cerrar.
       dialog.addEventListener("close", () => {
         entry!.lastTrigger?.focus();
         entry!.lastTrigger = null;
@@ -47,9 +51,21 @@
 
   const loginDialog = document.querySelector<HTMLDialogElement>("#login-dialog");
 
-  loginDialog?.querySelector<HTMLButtonElement>("[data-login-gmail]")?.addEventListener("click", () => {
-    trackMixpanelEvent("login_gmail_clicked");
-  });
+  // 2. Conecta el botón de inicio de sesión con Google (Firebase)
+  const botonGoogle = document.querySelector<HTMLButtonElement>("#btn-google-login");
+
+  if (botonGoogle) {
+    botonGoogle.addEventListener("click", async () => {
+      trackMixpanelEvent("login_gmail_clicked");
+      try {
+        const resultado = await signInWithPopup(auth, googleProvider);
+        console.log("¡Usuario autenticado con éxito!", resultado.user.email);
+        loginDialog?.close("success");
+      } catch (error) {
+        console.error("Error al iniciar sesión con Google", error);
+      }
+    });
+  }
 
   loginDialog?.querySelector<HTMLFormElement>("[data-login-form]")?.addEventListener("submit", (event) => {
     event.preventDefault();

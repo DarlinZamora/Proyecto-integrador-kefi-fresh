@@ -911,6 +911,48 @@ main section {
   margin: var(--space-sm) 0;
 }
 
+.datos-despacho {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.campo-grupo label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  text-align: left;
+}
+
+.campo-grupo input,
+.campo-grupo textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  box-sizing: border-box; /* Evita que el padding rompa el ancho */
+}
+
+.campo-grupo textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+
+
+
 .tag-list {
   display: flex;
   flex-wrap: wrap;
@@ -1084,11 +1126,12 @@ main section {
   transform: translateX(0);
 }
 
-.cart-drawer__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-sm);
+.cart-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .cart-drawer__header h2 {
@@ -1200,71 +1243,95 @@ main section {
   }
 }
 
-/* Testimonios */
+.testimonios-section {
+    padding: 60px 20px;
+    background-color: #fdfbf7;
+    text-align: center; /* <--- Esto centra absolutamente todo lo que esté dentro de la sección */
+}
+
+.testimonios-section h2,
 .testimonials__subtitle {
-  text-align: center;
-  color: var(--color-muted);
-  margin: -0.5rem 0 var(--space-md);
+    text-align: center;
+    width: 100%;
+    color: var(--color-muted,#0097b2);
 }
 
+.testimonials__subtitle {
+    text-align: center;
+    color: var(--color-muted, #777);
+    margin-bottom: 2rem;
+}
+
+/* Contenedor general de los testimonios */
+.testimonios-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    transition: all 0.4s ease;
+}
+
+/* Estilo base de cada tarjeta de testimonio */
 .testimonial {
-  display: grid;
-  gap: var(--space-md);
-  padding: var(--space-md);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    padding: 35px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 35px;
+    text-align: left;
+    
+    /* Transiciones suaves para el desenfoque y la escala */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                filter 0.4s ease, 
+                opacity 0.4s ease, 
+                box-shadow 0.4s ease;
 }
 
+/* EFECTO HOVER: Cuando el contenedor general tiene el mouse encima, 
+   todas las tarjetas se vuelven borrosas y opacas por defecto */
+.testimonios-container:hover .testimonial {
+    filter: blur(4px);
+    opacity: 0.4;
+    transform: scale(0.97);
+}
+
+/* EXCEPCIÓN: La tarjeta específica sobre la que pones el mouse 
+   recupera todo su brillo, se enfoca y se eleva elegantemente */
+.testimonios-container .testimonial:hover {
+    filter: blur(0px);
+    opacity: 1;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    z-index: 10; /* Asegura que la tarjeta enfocada quede por encima de las demás */
+}
+
+/* Efecto cuando pasas el cursor */
 .testimonial:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12);
-}
+    transform: translateY(-6px); /* <--- Eleva la tarjeta ligeramente hacia arriba */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12); /* <--- Aumenta la sombra para dar profundidad */
 
-.testimonial__author {
-  margin: 0;
-  text-align: center;
-}
-
-.testimonial__author .image-placeholder {
-  max-width: 10rem;
-  margin: 0 auto var(--space-sm);
 }
 
 .testimonial__photo {
-  display: block;
-  width: 100%;
-  max-width: 10rem;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: var(--radius);
-  margin: 0 auto var(--space-sm);
+    width: 140px;
+    height: 140px;
+    border-radius: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 4px solid #0097b2 !important;
+    border-bottom: 2px solid var(--color-border); /* Color de acento de la marca */
 }
 
-.testimonial__author cite {
-  display: block;
-  font-style: normal;
-  font-weight: 700;
-}
-
-.testimonial__handle {
-  display: block;
-  color: var(--color-muted);
-  font-size: var(--fs-sm);
-}
-
-.testimonial__quote {
-  margin: 0;
-  padding: var(--space-md);
-  background: var(--color-bg);
-  border-left: 4px solid var(--color-accent);
-  border-radius: 0 var(--radius) var(--radius) 0;
-}
-
-.testimonial__quote p {
-  margin: 0;
+.testimonial__text {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: #333;
+    margin: 0;
 }
 
 /* Formulario de contacto */

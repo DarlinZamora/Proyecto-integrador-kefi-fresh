@@ -141,6 +141,30 @@
       aria-label="Carrito de compras"
       aria-hidden="true"
     >
+    <!-- Formulario de Datos de Despacho -->
+<div class="datos-despacho">
+  <h3>Datos de entrega</h3>
+  
+  <div class="campo-grupo">
+    <label for="nombreCliente">Nombre y Apellido</label>
+    <input type="text" id="nombreCliente" name="nombreCliente" required placeholder="Ej: Ana García">
+  </div>
+
+  <div class="campo-grupo">
+    <label for="telefono">Teléfono</label>
+    <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 0991234567">
+  </div>
+
+  <div class="campo-grupo">
+    <label for="direccionEntrega">Dirección de entrega</label>
+    <input type="text" id="direccionEntrega" name="direccionEntrega" required placeholder="Sector, calle principal y referencia">
+  </div>
+
+  <div class="campo-grupo">
+    <label for="observaciones">Observaciones</label>
+    <textarea id="observaciones" name="observaciones" rows="2" required placeholder="Ej: Casa color blanco..."></textarea>
+  </div>
+</div>
       <div class="cart-drawer__header">
         <h2>Tu carrito</h2>
         <button type="button" class="btn btn--icon" data-cart-close aria-label="Cerrar carrito">
@@ -183,16 +207,9 @@
           <h2 id="login-dialog-title" class="login-dialog__title">Iniciar sesión</h2>
           <p class="login-dialog__subtitle">Inicia sesión o crea una cuenta</p>
 
-          <button type="button" class="btn btn--primary login-dialog__gmail" data-login-gmail>
-            <span class="login-dialog__gmail-icon" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 18 18" focusable="false">
-                <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.88 2.7-6.62z" />
-                <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.96v2.33A9 9 0 0 0 9 18z" />
-                <path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.16.28-1.7V4.97H.96A9 9 0 0 0 0 9c0 1.45.35 2.83.96 4.03l2.99-2.33z" />
-                <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.97L3.95 7.3C4.66 5.17 6.65 3.58 9 3.58z" />
-              </svg>
-            </span>
-            Continuar con Gmail
+          <button type="button" id="btn-google-login" class="btn btn--primary login-dialog_gmail" data-login-gmail>
+            <img src="img/google-logo.png" alt="" width="20" height="20" />
+            Continuar con Google
           </button>
 
           <div class="login-dialog__divider"><span>o</span></div>
@@ -468,34 +485,49 @@
         </article>
       </section>
 
-      <section id="testimonios" class="testimonials" aria-labelledby="testimonials-title">
-        <h2 id="testimonials-title" class="section-title">Testimonios</h2>
-        <p class="testimonials__subtitle">Reseña de un profesional</p>
+      <section id="testimonios" class="testimonios-section">
+    <div class="container">
+        <h2>Testimonios</h2>
+        <p class="testimonials__subtitle">Lo que dicen nuestros clientes</p>
 
-        <article class="testimonial" aria-labelledby="testimonial-author">
-          <figure class="testimonial__author">
-            <img
-              class="testimonial__photo"
-              src="img/carlos-bustamante.jpg"
-              alt="Foto de Ing. Carlos Bustamante"
-              width="1071"
-              height="768"
-              loading="lazy"
-            />
-            <figcaption>
-              <cite id="testimonial-author">Ing. Carlos Bustamante</cite>
-              <span class="testimonial__handle">@carlosbm</span>
-            </figcaption>
-          </figure>
+        <div class="testimonios-container">
+            <div class="testimonial">
+                <img src="img/melanie.jpg" alt="Testimonio cliente 1" class="testimonial__photo">
+                <div class="testimonial__content">
+                    <p class="testimonial__text">¡Delicioso y súper fresco! Perfectos para una merienda saludable sin culpa.</p>
+                </div>
+            </div>
 
-          <blockquote class="testimonial__quote">
-            <p>
-              Recomiendo este postre por su potencial de mercado y su sabor fresco. No es
-              demasiado dulce y funciona perfectamente como merienda saludable.
-            </p>
-          </blockquote>
-        </article>
-      </section>
+            <div class="testimonial">
+                <img src="img/cris.jpg" alt="Testimonio cliente 2" class="testimonial__photo">
+                <div class="testimonial__content">
+                    <p class="testimonial__text">La atención es excelente y los productos llegaron a tiempo. ¡100% recomendados!</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="img/sebas.jpg" alt="Testimonio cliente 3" class="testimonial__photo">
+                <div class="testimonial__content">
+                    <p class="testimonial__text">El sabor es increíble y lo mejor es que son 100% saludables.</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="img/shirleysita.jpg" alt="Testimonio cliente 4" class="testimonial__photo">
+                <div class="testimonial__content">
+                    <p class="testimonial__text">Ideales para calmar el antojo sin culpa. ¡Los pido todas las semanas!</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <img src="img/ricardo.jpg" alt="Testimonio cliente 5" class="testimonial__photo">
+                <div class="testimonial__content">
+                    <p class="testimonial__text">Una combinación perfecta entre frescura, salud y un sabor riquísimo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
       <section id="contacto" class="contact" aria-labelledby="contact-title">
         <h2 id="contact-title" class="section-title">Contactos</h2>
@@ -504,7 +536,7 @@
           comunicaré contigo lo antes posible.
         </p>
 
-        <form class="form-contacto" action="#" method="post" novalidate data-contact-form>
+        <form class="form-contacto" action="https://formspree.io/f/myewkopz" method="POST">
           <div class="form-field">
             <label for="nombre">Nombre:</label>
             <input
@@ -515,6 +547,7 @@
               required
               aria-required="true"
               aria-describedby="nombre-error"
+              
             />
             <p class="form-field__error" id="nombre-error" role="alert"></p>
           </div>
