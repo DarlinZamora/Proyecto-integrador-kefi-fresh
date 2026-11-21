@@ -1,0 +1,17 @@
+{
+  "capturedAt": "2026-11-16T23:25:22.347Z",
+  "dependencies": {
+    "firebase": "^13.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "oxlint": "1.79.0",
+    "typescript": "5.0.3",
+    "vite": "6.2.2"
+  }
+}
