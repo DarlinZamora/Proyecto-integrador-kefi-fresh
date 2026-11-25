@@ -9,19 +9,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./proyecto-bootcamp
 
     steps:
       - name: 1. Descargar el código del repositorio
         uses: actions/checkout@v4
 
-      - name: 2. Configurar entorno Node.js
+      - name: 2. Configurar pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: 3. Configurar entorno Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
+          cache-dependency-path: proyecto-bootcamp/pnpm-lock.yaml
 
-      - name: 3. Instalar dependencias
-        run: npm ci
+      - name: 4. Instalar dependencias
+        run: pnpm install --frozen-lockfile
 
-      - name: 4. Compilar aplicación React
-        run: npm run build
+      - name: 5. Compilar aplicación React
+        run: pnpm run build
