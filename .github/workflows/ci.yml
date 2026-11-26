@@ -2,42 +2,38 @@ name: CI - Frontend React
 
 on:
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
-  build:
+  validate-and-build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: proyecto-bootcamp
 
     steps:
-      - name: 1. Descargar el código del repositorio
+      - name: Descargar código fuente
         uses: actions/checkout@v4
 
-      - name: 2. Configurar pnpm
+      - name: Configurar pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 11.17.0
 
-      - name: 3. Configurar entorno Node.js
+      - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'pnpm'
-          cache-dependency-path: proyecto-bootcamp/pnpm-lock.yaml
+          node-version: "22"
+          cache: "pnpm"
 
-      - name: 4. Instalar dependencias
+      - name: Instalar dependencias
         run: pnpm install --frozen-lockfile
 
-      - name: 5. Validar calidad del código con ESLint
+      - name: Validar calidad del código con lint
         run: pnpm run lint
 
-      - name: 6. Compilar aplicación React
+      - name: Compilar aplicación React
         run: pnpm run build
 
-      - name: 7. Subir artefacto dist
+      - name: Subir artefacto dist
         uses: actions/upload-artifact@v4
         with:
           name: react-dist-build
-          path: proyecto-bootcamp/dist/
+          path: dist/
