@@ -55,9 +55,9 @@ jobs:
       - name: Configurar credenciales de AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.ASIA4L6WFEQSFBKXRXCW }}
-          aws-secret-access-key: ${{ secrets.cm18oAdYE71k1c2sOBJeL6FWj763s3IDxWwqZajF }}
-          aws-session-token: ${{ secrets.IQoJb3JpZ2luX2VjEBsaCXVzLXdlc3QtMiJGMEQCIAKqHdk5neUmRT7YxyTMolwhwZnewSRJ3VVO/v0utm3cAiACVdOe6J67EU1Mm1jJ53UOPAwpaUTSXRDyWaf/XRDFOCrBAgjk//////////8BEAEaDDg1MDMxNTc4MTE1NiIMMUpmi6dRwOrp5NxXKpUC2irqVCGDU2fRLdTgbW9h7+VJOmAMuHYTUEixXkfm57GrmAxZnuQlXlQ8TPgbUdRwvBDsx5cILMb4ky8+kWfeg8DUzoJJFfylS6KioMbAi7wmL6av6lwzigDDvNHlZy/XzGJi9KzGzL62wM9y9dyEXZ1BGl/e3I6twE4USq65hxNlNMpIsclxnRtPDIMvAfQhrD2kg+tJyfgZQ5uAVbTOAEg37uUUeiJSC+Q3Z0297ePPhLwtHiecok9h7aOCumWes0kFZkjCboj2QMPu05wlJ14w9R+MNYjy2HpO/1PTEEk8CUrQwpa/Y012JcvDGHEgrfLZRcjCGsOVtTo7d9pOvkACs5JMR5xZcGbnolKu6cAV+uG/lDChganYBjqeAUOxW5z0PL/v9a0oft29PBahEDYvOeU9q9zbwpiNfXjOPsDuQf6WOZjUHl7vs6tWKPARNyUJ8wsFfKySu5Zen2Yit9x1kJlCCnBs+koYIZlDFn5WtJVxkFWNoNf1+npIWWN4OirQVQupM6unchlwkaW7aQnDJKlQuEx0wv9eWxxp9gZslpDoGM9uB1EZEjIIF+Zw1+chdyAwRTx/GVTM }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ vars.app-react-2026 }}
 
       - name: Sincronizar archivos con Amazon S3
