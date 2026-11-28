@@ -2,6 +2,7 @@ import { useState } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
+import AiAssistantPanel from "./components/AiAssistantPanel";
 import './App.css'
 
 function App() {
