@@ -17,6 +17,7 @@ function App() {
         </div>
         <div>
           <h1>Despliegue automático en S3 activo</h1>
+          <p><strong>Versión 2.0</strong></p>
           <p>
             Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
           </p>
