@@ -61,4 +61,4 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Sincronizar archivos con Amazon S3
-        run: aws s3 sync ./site-dist s3://${{ vars.app-react-2026 }} --delete
+        run: aws s3 sync ./site-dist s3://${{ vars.AWS_BUCKET_NAME }} --delete
